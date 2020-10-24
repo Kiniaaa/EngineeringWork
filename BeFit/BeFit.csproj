@@ -216,6 +216,17 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RESTControllers\CustomerDatasController.cs" />
+    <Compile Include="RESTControllers\DietMealsController.cs" />
+    <Compile Include="RESTControllers\DietsController.cs" />
+    <Compile Include="RESTControllers\IngridientsController.cs" />
+    <Compile Include="RESTControllers\MealIngridientsController.cs" />
+    <Compile Include="RESTControllers\MealOpinionsController.cs" />
+    <Compile Include="RESTControllers\MealsController.cs" />
+    <Compile Include="RESTControllers\PhysicalActivitiesController.cs" />
+    <Compile Include="RESTControllers\TypeOfDietsController.cs" />
+    <Compile Include="RESTControllers\TypeOfMealsController.cs" />
+    <Compile Include="RESTControllers\UsersController.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
