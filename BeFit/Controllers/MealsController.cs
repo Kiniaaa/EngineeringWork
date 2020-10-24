@@ -18,8 +18,7 @@ namespace BeFit.Controllers
         // GET: Meals
         public ActionResult Index()
         {
-            var meals = db.Meals.Include(m => m.MealOpinion);
-            return View(meals.ToList());
+            return View(db.Meals.ToList());
         }
 
         // GET: Meals/Details/5
@@ -40,7 +39,6 @@ namespace BeFit.Controllers
         // GET: Meals/Create
         public ActionResult Create()
         {
-            ViewBag.MealOpinionId = new SelectList(db.MealOpinions, "Id", "Description");
             return View();
         }
 
@@ -49,7 +47,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,MealOpinionId")] Meal meal)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Meal meal)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +56,6 @@ namespace BeFit.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MealOpinionId = new SelectList(db.MealOpinions, "Id", "Description", meal.MealOpinionId);
             return View(meal);
         }
 
@@ -74,7 +71,6 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MealOpinionId = new SelectList(db.MealOpinions, "Id", "Description", meal.MealOpinionId);
             return View(meal);
         }
 
@@ -83,7 +79,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,MealOpinionId")] Meal meal)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Meal meal)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +87,6 @@ namespace BeFit.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MealOpinionId = new SelectList(db.MealOpinions, "Id", "Description", meal.MealOpinionId);
             return View(meal);
         }
 

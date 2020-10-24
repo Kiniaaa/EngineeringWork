@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BeFit.DAL
 {
-    public class DietCenterInitializer : DropCreateDatabaseIfModelChanges<DietCenterContext>
+    public class DietCenterInitializer : DropCreateDatabaseAlways<DietCenterContext>
     {
         protected override void Seed(DietCenterContext context)
         {
@@ -99,7 +99,7 @@ namespace BeFit.DAL
 
             var mealOpinion = new List<MealOpinion>
             {
-                new MealOpinion { MealRate = 3, DateOpinion = DateTime.Parse("2020-10-20"), Description = "Całkiem niezły", Customer = user[0]}
+                new MealOpinion { MealRate = 3, DateOpinion = DateTime.Parse("2020-10-20"), Description = "Całkiem niezły", Customer = user[0], Meal = meal[0]}
             };
             mealOpinion.ForEach(mo => context.MealOpinions.Add(mo));
             context.SaveChanges();

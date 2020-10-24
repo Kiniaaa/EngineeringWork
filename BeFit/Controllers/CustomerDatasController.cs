@@ -18,8 +18,8 @@ namespace BeFit.Controllers
         // GET: CustomerDatas
         public ActionResult Index()
         {
-            var customerDatas = db.CustomerDatas.Include(c => c.Customer);
-            return View(customerDatas.ToList());
+            var customerDatas = db.CustomerDatas.ToList();
+            return View(customerDatas);
         }
 
         // GET: CustomerDatas/Details/5

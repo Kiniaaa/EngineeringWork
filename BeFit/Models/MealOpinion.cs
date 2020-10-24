@@ -11,11 +11,12 @@ namespace BeFit.Models
         public int MealRate { get; set; }
         public DateTime DateOpinion { get; set; }
         public string Description { get; set; }
+        public int MealId { get; set; }
 
-       
+
         public int UserId { get; set; }
         public virtual User Customer { get; set; }
-        public virtual List<Meal> Meals { get; set; }
+        public virtual Meal Meal { get; set; }
 
     }
 }

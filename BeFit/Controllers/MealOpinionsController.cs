@@ -18,7 +18,7 @@ namespace BeFit.Controllers
         // GET: MealOpinions
         public ActionResult Index()
         {
-            var mealOpinions = db.MealOpinions.Include(m => m.Customer);
+            var mealOpinions = db.MealOpinions.Include(m => m.Customer).Include(m => m.Meal);
             return View(mealOpinions.ToList());
         }
 
@@ -41,6 +41,7 @@ namespace BeFit.Controllers
         public ActionResult Create()
         {
             ViewBag.UserId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name");
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MealRate,DateOpinion,Description,UserId")] MealOpinion mealOpinion)
+        public ActionResult Create([Bind(Include = "Id,MealRate,DateOpinion,Description,MealId,UserId")] MealOpinion mealOpinion)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +60,7 @@ namespace BeFit.Controllers
             }
 
             ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", mealOpinion.UserId);
+            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealOpinion.MealId);
             return View(mealOpinion);
         }
 
@@ -75,6 +77,7 @@ namespace BeFit.Controllers
                 return HttpNotFound();
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", mealOpinion.UserId);
+            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealOpinion.MealId);
             return View(mealOpinion);
         }
 
@@ -83,7 +86,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MealRate,DateOpinion,Description,UserId")] MealOpinion mealOpinion)
+        public ActionResult Edit([Bind(Include = "Id,MealRate,DateOpinion,Description,MealId,UserId")] MealOpinion mealOpinion)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +95,7 @@ namespace BeFit.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", mealOpinion.UserId);
+            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealOpinion.MealId);
             return View(mealOpinion);
         }
 
