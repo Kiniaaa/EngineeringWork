@@ -1,0 +1,106 @@
+﻿@model BeFit.Models.Diet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Diet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfDiet.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfDiet.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnergeticValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnergeticValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DieticianOpinion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DieticianOpinion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DieticianRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DieticianRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DietOpinion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DietOpinion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DietRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DietRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdditionalWarning)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdditionalWarning)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

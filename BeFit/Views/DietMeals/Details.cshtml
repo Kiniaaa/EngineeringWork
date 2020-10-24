@@ -1,0 +1,50 @@
+﻿@model BeFit.Models.DietMeal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DietMeal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Diet.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diet.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meal.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meal.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfMeal.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfMeal.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfEating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfEating)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BeFit.Models.DietMeal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Diet.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meal.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfMeal.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfEating)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diet.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meal.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfMeal.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfEating)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

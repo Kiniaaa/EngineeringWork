@@ -1,0 +1,112 @@
+﻿@model BeFit.Models.Diet
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Diet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfDiet.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfDiet.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnergeticValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnergeticValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DieticianOpinion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DieticianOpinion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DieticianRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DieticianRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DietOpinion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DietOpinion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DietRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DietRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdditionalWarning)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdditionalWarning)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
