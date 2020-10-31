@@ -18,8 +18,7 @@ namespace BeFit.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.UserRole);
-            return View(users.ToList());
+            return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
@@ -40,7 +39,6 @@ namespace BeFit.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            ViewBag.UserRoleId = new SelectList(db.UserRoles, "Id", "Id");
             return View();
         }
 
@@ -49,7 +47,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserName,FirstName,Surname,Deleted,DateOfBirth,UserRoleId")] User user)
+        public ActionResult Create([Bind(Include = "Id,UserName,FirstName,Surname,Deleted,DateOfBirth")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +56,6 @@ namespace BeFit.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserRoleId = new SelectList(db.UserRoles, "Id", "Id", user.UserRoleId);
             return View(user);
         }
 
@@ -74,7 +71,6 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserRoleId = new SelectList(db.UserRoles, "Id", "Id", user.UserRoleId);
             return View(user);
         }
 
@@ -83,7 +79,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserName,FirstName,Surname,Deleted,DateOfBirth,UserRoleId")] User user)
+        public ActionResult Edit([Bind(Include = "Id,UserName,FirstName,Surname,Deleted,DateOfBirth")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +87,6 @@ namespace BeFit.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserRoleId = new SelectList(db.UserRoles, "Id", "Id", user.UserRoleId);
             return View(user);
         }
 

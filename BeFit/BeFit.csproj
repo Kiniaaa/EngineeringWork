@@ -193,7 +193,6 @@
     <Compile Include="Controllers\PhysicalActivitiesController.cs" />
     <Compile Include="Controllers\TypeOfDietsController.cs" />
     <Compile Include="Controllers\TypeOfMealsController.cs" />
-    <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\DietCenterContext.cs" />
     <Compile Include="DAL\DietCenterInitializer.cs" />
@@ -214,7 +213,6 @@
     <Compile Include="Models\TypeOfDiet.cs" />
     <Compile Include="Models\TypeOfMeal.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RESTControllers\CustomerDatasController.cs" />
     <Compile Include="RESTControllers\DietMealsController.cs" />

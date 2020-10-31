@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BeFit.Models;
+using BeFit.DAL;
 
 namespace BeFit.Controllers
 {
@@ -156,7 +157,12 @@ namespace BeFit.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    User customer = new User { UserName = model.Email, FirstName = model.FirstName, Surname = model.LastName, DateOfBirth = DateTime.Parse("1995-07-20")};
+                    DietCenterContext db = new DietCenterContext();
+                    UserManager.AddToRole(user.Id, "Dietetyk");
+                    db.Users.Add(customer);
+                    db.SaveChanges();
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

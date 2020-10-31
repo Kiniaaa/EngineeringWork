@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>BeFit - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,13 +17,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("BeFit", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Customer Data", "Index", "CustomerDatas")</li>
-                    @*<li>@Html.ActionLink("Diet Meals", "Index", "DietMeals")</li>
+                    <li>@Html.ActionLink("Diety", "Index", "Diets")</li>
+                    <li>@Html.ActionLink("Posiłki", "Index", "Meals")</li>
+                    <li>@Html.ActionLink("Użytkownicy", "Index", "Users")</li>
+
+                    @*<li>@Html.ActionLink("Customer Data", "Index", "CustomerDatas")</li>
+                    <li>@Html.ActionLink("Diet Meals", "Index", "DietMeals")</li>
                     <li>@Html.ActionLink("Diets", "Index", "Diets")</li>
                     <li>@Html.ActionLink("Ingridients", "Index", "Ingridients")</li>
                     <li>@Html.ActionLink("Meal Ingridients", "Index", "MealIngridients")</li>
@@ -32,7 +35,6 @@
                     <li>@Html.ActionLink("Type Of Diets", "Index", "TypeOfDiets")</li>
                     <li>@Html.ActionLink("Type Of Meals", "Index", "TypeOfMeals")</li>
                     <li>@Html.ActionLink("User", "Index", "User")</li>
-                    <li>@Html.ActionLink("User Roles", "Index", "UserRoles")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                 </ul>
@@ -44,7 +46,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; BeFit @DateTime.Now.Year</p>
         </footer>
     </div>
 

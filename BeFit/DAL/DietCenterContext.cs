@@ -24,7 +24,11 @@ namespace BeFit.DAL
         public DbSet<TypeOfDiet> TypeOfDiets { get; set; }
         public DbSet<TypeOfMeal> TypeOfMeals { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MealOpinion>().HasRequired<DietMeal>(mp => mp.DietMeal).WithOptional(dm => dm.MealOpinion).WillCascadeOnDelete(false);
+        }
 
     }
 }

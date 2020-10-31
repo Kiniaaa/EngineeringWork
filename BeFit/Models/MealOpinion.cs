@@ -14,11 +14,14 @@ namespace BeFit.Models
         public string Description { get; set; }
         public int MealId { get; set; }
         public int UserId { get; set; }
+        public int DietMealId { get; set; }
 
         [JsonIgnore]
         public virtual User Customer { get; set; }
         [JsonIgnore]
         public virtual Meal Meal { get; set; }
+        [JsonIgnore]
+        public virtual DietMeal DietMeal { get; set; }
 
     }
 }
