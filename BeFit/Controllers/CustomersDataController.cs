@@ -11,18 +11,18 @@ using BeFit.Models;
 
 namespace BeFit.Controllers
 {
-    public class CustomerDatasController : Controller
+    public class CustomersDataController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
 
-        // GET: CustomerDatas
+        // GET: CustomersData
         public ActionResult Index()
         {
-            var customerDatas = db.CustomerDatas.ToList();
-            return View(customerDatas);
+            var customerDatas = db.CustomerDatas.Include(c => c.Customer);
+            return View(customerDatas.ToList());
         }
 
-        // GET: CustomerDatas/Details/5
+        // GET: CustomersData/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,14 +37,14 @@ namespace BeFit.Controllers
             return View(customerData);
         }
 
-        // GET: CustomerDatas/Create
+        // GET: CustomersData/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
-        // POST: CustomerDatas/Create
+        // POST: CustomersData/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,11 +58,11 @@ namespace BeFit.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", customerData.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", customerData.UserId);
             return View(customerData);
         }
 
-        // GET: CustomerDatas/Edit/5
+        // GET: CustomersData/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,11 +74,11 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", customerData.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", customerData.UserId);
             return View(customerData);
         }
 
-        // POST: CustomerDatas/Edit/5
+        // POST: CustomersData/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -91,11 +91,11 @@ namespace BeFit.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", customerData.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", customerData.UserId);
             return View(customerData);
         }
 
-        // GET: CustomerDatas/Delete/5
+        // GET: CustomersData/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,7 +110,7 @@ namespace BeFit.Controllers
             return View(customerData);
         }
 
-        // POST: CustomerDatas/Delete/5
+        // POST: CustomersData/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

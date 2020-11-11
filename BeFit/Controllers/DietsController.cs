@@ -49,7 +49,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,EnergeticValue,DateStart,Duration,DieticianOpinion,DieticianRate,DietOpinion,DietRate,AdditionalWarning,TypeOfDietId,UserId")] Diet diet)
+        public ActionResult Create([Bind(Include = "Id,Name,EnergeticValue,DateStart,Duration,DieticianOpinion,DieticianRate,DietOpinion,DietRate,AdditionalWarning,TypeOfDietId")] Diet diet)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,EnergeticValue,DateStart,Duration,DieticianOpinion,DieticianRate,DietOpinion,DietRate,AdditionalWarning,TypeOfDietId,UserId")] Diet diet)
+        public ActionResult Edit([Bind(Include = "Id,Name,EnergeticValue,DateStart,Duration,DieticianOpinion,DieticianRate,DietOpinion,DietRate,AdditionalWarning,TypeOfDietId")] Diet diet)
         {
             if (ModelState.IsValid)
             {

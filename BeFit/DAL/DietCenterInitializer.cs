@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace BeFit.DAL
 {
@@ -17,8 +18,9 @@ namespace BeFit.DAL
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-            roleManager.Create(new IdentityRole("Admin"));
+            //roleManager.Create(new IdentityRole("Admin"));
             roleManager.Create(new IdentityRole("Dietetyk"));
+            roleManager.Create(new IdentityRole("Klient"));
 
             var ingridient = new List<Ingridient>
             {
@@ -70,10 +72,13 @@ namespace BeFit.DAL
 
             var user = new List<User>
             {
-                new User { FirstName = "Anna", Surname = "Kowalska", DateOfBirth = DateTime.Parse("1998-10-10") },
-                new User { FirstName = "Jan", Surname = "Nowak", DateOfBirth = DateTime.Parse("1990-12-01") },
-                new User { FirstName = "Krzysztof", Surname = "Czajka", DateOfBirth = DateTime.Parse("1995-07-20")}
+                new User { Email = "test@o2.pl", FirstName = "Anna", Surname = "Kowalska", DateOfBirth = DateTime.Parse("1998-10-10")},
+                new User { Email = "jan@o2.pl", FirstName = "Jan", Surname = "Nowak", DateOfBirth = DateTime.Parse("1990-12-01") },
+                new User { Email = "krzysio@o2.pl", FirstName = "Krzysztof", Surname = "Czajka", DateOfBirth = DateTime.Parse("1995-07-20")}
+                
             };
+            string[] userNames = { user[0].Email, user[1].Email, user[2].Email };
+            Roles.AddUsersToRole(userNames, "Klient");
             user.ForEach(u => context.Users.Add(u));
             context.SaveChanges();
 
@@ -94,10 +99,6 @@ namespace BeFit.DAL
             };
             physicalActivity.ForEach(pa => context.PhysicalActivities.Add(pa));
             context.SaveChanges();
-
-
-            
-
 
             var diet = new List<Diet>
             {

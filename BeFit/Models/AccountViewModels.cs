@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace BeFit.Models
 {
@@ -78,6 +80,10 @@ namespace BeFit.Models
         [StringLength(100, ErrorMessage = "{0} musi mieć co najmniej {2} znaki.", MinimumLength = 2)]
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Data urodzenia")]
+        public DateTime DateOfBirth { get; set; }
 
 
         [Required]

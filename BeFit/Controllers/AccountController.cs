@@ -158,7 +158,7 @@ namespace BeFit.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    User customer = new User { UserName = model.Email, FirstName = model.FirstName, Surname = model.LastName, DateOfBirth = DateTime.Parse("1995-07-20")};
+                    User customer = new User { Email = model.Email, FirstName = model.FirstName, Surname = model.LastName, DateOfBirth = model.DateOfBirth };
                     DietCenterContext db = new DietCenterContext();
                     UserManager.AddToRole(user.Id, "Dietetyk");
                     db.Users.Add(customer);

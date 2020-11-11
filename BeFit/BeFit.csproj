@@ -181,7 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CustomerDatasController.cs" />
+    <Compile Include="Controllers\CustomersDataController.cs" />
     <Compile Include="Controllers\DietMealsController.cs" />
     <Compile Include="Controllers\DietsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -214,7 +214,7 @@
     <Compile Include="Models\TypeOfMeal.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RESTControllers\CustomerDatasController.cs" />
+    <Compile Include="RESTControllers\CustomersDataController.cs" />
     <Compile Include="RESTControllers\DietMealsController.cs" />
     <Compile Include="RESTControllers\DietsController.cs" />
     <Compile Include="RESTControllers\IngridientsController.cs" />
@@ -283,11 +283,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\CustomerDatas\Create.cshtml" />
-    <Content Include="Views\CustomerDatas\Delete.cshtml" />
-    <Content Include="Views\CustomerDatas\Details.cshtml" />
-    <Content Include="Views\CustomerDatas\Edit.cshtml" />
-    <Content Include="Views\CustomerDatas\Index.cshtml" />
     <Content Include="Views\Diets\Create.cshtml" />
     <Content Include="Views\Diets\Delete.cshtml" />
     <Content Include="Views\Diets\Details.cshtml" />
@@ -343,6 +338,11 @@
     <Content Include="Views\UserRoles\Details.cshtml" />
     <Content Include="Views\UserRoles\Edit.cshtml" />
     <Content Include="Views\UserRoles\Index.cshtml" />
+    <Content Include="Views\CustomersData\Create.cshtml" />
+    <Content Include="Views\CustomersData\Delete.cshtml" />
+    <Content Include="Views\CustomersData\Details.cshtml" />
+    <Content Include="Views\CustomersData\Edit.cshtml" />
+    <Content Include="Views\CustomersData\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

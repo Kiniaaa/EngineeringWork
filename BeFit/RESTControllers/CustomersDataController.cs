@@ -13,7 +13,7 @@ using BeFit.Models;
 
 namespace BeFit.RESTControllers
 {
-    public class CustomerDatasController : ApiController
+    public class CustomersDataController : ApiController
     {
         private DietCenterContext db = new DietCenterContext();
 

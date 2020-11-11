@@ -47,7 +47,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserName,FirstName,Surname,Deleted,DateOfBirth")] User user)
+        public ActionResult Create([Bind(Include = "Id,Email,password_hash,FirstName,Surname,Deleted,DateOfBirth")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserName,FirstName,Surname,Deleted,DateOfBirth")] User user)
+        public ActionResult Edit([Bind(Include = "Id,Email,password_hash,FirstName,Surname,Deleted,DateOfBirth")] User user)
         {
             if (ModelState.IsValid)
             {

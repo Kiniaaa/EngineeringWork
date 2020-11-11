@@ -19,7 +19,6 @@ namespace BeFit.Models
         public int DietRate { get; set; }
         public string AdditionalWarning { get; set; }
         public int TypeOfDietId { get; set; }
-        public int UserId { get; set; }
 
         [JsonIgnore]
         public virtual TypeOfDiet TypeOfDiet { get; set; }
