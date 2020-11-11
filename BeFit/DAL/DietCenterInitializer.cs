@@ -1,29 +1,45 @@
 ﻿using BeFit.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace BeFit.DAL
 {
-    public class DietCenterInitializer : DropCreateDatabaseIfModelChanges<DietCenterContext>
+    public class DietCenterInitializer : DropCreateDatabaseAlways<DietCenterContext>
     {
         protected override void Seed(DietCenterContext context)
         {
             base.Seed(context);
+            var user1 = new ApplicationUser { UserName = "ania@o2.pl" };
+            var user2 = new ApplicationUser { UserName = "jan@o2.pl" };
+            var user3 = new ApplicationUser { UserName = "krzysio@o2.pl" };
+            string pass = "asdQWE123.";
+            
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-            var userRole = new List<UserRole>
-            {
-                new UserRole {Name = Name.Klient},
-                new UserRole {Name = Name.Dietetyk}
-            };
-            userRole.ForEach(ur => context.UserRoles.Add(ur));
-            context.SaveChanges();
+            roleManager.Create(new IdentityRole("Admin"));
+            roleManager.Create(new IdentityRole("Dietetyk"));
+            roleManager.Create(new IdentityRole("Klient"));
+
+            userManager.Create(user1, pass);
+            userManager.Create(user2, pass);
+            userManager.Create(user3, pass);
+
+            userManager.AddToRole(user1.Id, "Admin");
+            userManager.AddToRole(user2.Id, "Dietetyk");
+            userManager.AddToRole(user3.Id, "Klient");
+
+
 
             var ingridient = new List<Ingridient>
             {
-                new Ingridient { Name = "Orzechy laskowe", EnergeticValue = 628, Fat = 60, Protein = 15, CarboHydrates = 17, MeasureRate = MeasureRate.g },
+                new Ingridient {Name = "Orzechy laskowe", EnergeticValue = 628, Fat = 60, Protein = 15, CarboHydrates = 17, MeasureRate = MeasureRate.g },
                 new Ingridient {Name = "Ziemniaki", EnergeticValue = 69, Fat = 0, Protein = 2, CarboHydrates = 16, MeasureRate = MeasureRate.g },
                 new Ingridient {Name = "Ryż", EnergeticValue = 344, Fat = 1, Protein = 7, CarboHydrates = 79, MeasureRate = MeasureRate.g},
                 new Ingridient {Name = "Pierś z kurczaka", EnergeticValue = 99, Fat = 1, Protein = 21, CarboHydrates = 0, MeasureRate = MeasureRate.g},
@@ -71,9 +87,10 @@ namespace BeFit.DAL
 
             var user = new List<User>
             {
-                new User { FirstName = "Anna", Surname = "Kowalska", UserRole = userRole[0], DateOfBirth = DateTime.Parse("1998-10-10") },
-                new User { FirstName = "Jan", Surname = "Nowak", UserRole = userRole[0], DateOfBirth = DateTime.Parse("1990-12-01") },
-                new User { FirstName = "Krzysztof", Surname = "Czajka", UserRole = userRole[1], DateOfBirth = DateTime.Parse("1995-07-20")}
+                new User { Email = user1.UserName, FirstName = "Anna", Surname = "Kowalska", DateOfBirth = new DateTime(1998,10,10)},
+                new User { Email = user2.UserName, FirstName = "Jan", Surname = "Nowak", DateOfBirth = new DateTime(1990,12,1) },
+                new User { Email = user3.UserName, FirstName = "Krzysztof", Surname = "Czajka", DateOfBirth = new DateTime(1995,7,20)}
+                
             };
             user.ForEach(u => context.Users.Add(u));
             context.SaveChanges();
@@ -96,15 +113,6 @@ namespace BeFit.DAL
             physicalActivity.ForEach(pa => context.PhysicalActivities.Add(pa));
             context.SaveChanges();
 
-
-            var mealOpinion = new List<MealOpinion>
-            {
-                new MealOpinion { MealRate = 3, DateOpinion = DateTime.Parse("2020-10-20"), Description = "Całkiem niezły", Customer = user[0]}
-            };
-            mealOpinion.ForEach(mo => context.MealOpinions.Add(mo));
-            context.SaveChanges();
-
-
             var diet = new List<Diet>
             {
                 new Diet { Name = "Wiosenna", EnergeticValue = 1800, DateStart = DateTime.Parse("2020-10-11"), Duration = 30, AdditionalWarning = "Przygotownie posiłków jest bardzo proste, polecam", TypeOfDiet = dietType[2], Customer = user[0], Dietician = user[2]},
@@ -121,6 +129,13 @@ namespace BeFit.DAL
                 new DietMeal { DateOfEating = DateTime.Parse("2020-11-12"), TypeOfMeal = mealType[2], Diet = diet[1], Meal = meal[0]}
             };
             dietMeal.ForEach(dm => context.DietMeals.Add(dm));
+            context.SaveChanges();
+
+            var mealOpinion = new List<MealOpinion>
+            {
+                new MealOpinion { MealRate = 3, DateOpinion = DateTime.Parse("2020-10-20"), Description = "Całkiem niezły", Customer = user[0], Meal = meal[0], DietMeal = dietMeal[0]}
+            };
+            mealOpinion.ForEach(mo => context.MealOpinions.Add(mo));
             context.SaveChanges();
         }
     }
