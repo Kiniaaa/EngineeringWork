@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BeFit.Models;
 using BeFit.DAL;
+using System.Web.Security;
 
 namespace BeFit.Controllers
 {
@@ -161,6 +162,7 @@ namespace BeFit.Controllers
                     User customer = new User { Email = model.Email, FirstName = model.FirstName, Surname = model.LastName, DateOfBirth = model.DateOfBirth };
                     DietCenterContext db = new DietCenterContext();
                     UserManager.AddToRole(user.Id, "Dietetyk");
+                    customer.roleName = UserManager.GetRoles(user.Id).FirstOrDefault().ToString();
                     db.Users.Add(customer);
                     db.SaveChanges();
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

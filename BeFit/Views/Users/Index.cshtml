@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.DateOfBirth)
         </th>
         <th>
-            Rola
+            @Html.DisplayNameFor(model => model.FirstOrDefault().roleName)
         </th>
         <th></th>
     </tr>
@@ -41,7 +41,7 @@
         @Html.DisplayFor(modelItem => item.DateOfBirth)
     </td>
     <td>
-          @Html.Display(Roles.GetRolesForUser(item.Email).ToString())
+        @Html.DisplayFor(modelItem => item.roleName)
     </td>
     <td>
         @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |

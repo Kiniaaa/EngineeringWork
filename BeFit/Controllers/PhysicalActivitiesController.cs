@@ -40,7 +40,7 @@ namespace BeFit.Controllers
         // GET: PhysicalActivities/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace BeFit.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", physicalActivity.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", physicalActivity.UserId);
             return View(physicalActivity);
         }
 
@@ -74,7 +74,7 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", physicalActivity.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", physicalActivity.UserId);
             return View(physicalActivity);
         }
 
@@ -91,7 +91,7 @@ namespace BeFit.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", physicalActivity.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", physicalActivity.UserId);
             return View(physicalActivity);
         }
 

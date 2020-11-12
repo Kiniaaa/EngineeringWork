@@ -40,7 +40,7 @@ namespace BeFit.Controllers
         // GET: MealOpinions/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             ViewBag.MealId = new SelectList(db.Meals, "Id", "Name");
             return View();
         }
@@ -59,7 +59,7 @@ namespace BeFit.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", mealOpinion.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", mealOpinion.UserId);
             ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealOpinion.MealId);
             return View(mealOpinion);
         }
@@ -76,7 +76,7 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", mealOpinion.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", mealOpinion.UserId);
             ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealOpinion.MealId);
             return View(mealOpinion);
         }
@@ -94,7 +94,7 @@ namespace BeFit.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", mealOpinion.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", mealOpinion.UserId);
             ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealOpinion.MealId);
             return View(mealOpinion);
         }

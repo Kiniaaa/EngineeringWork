@@ -15,12 +15,27 @@ namespace BeFit.DAL
         protected override void Seed(DietCenterContext context)
         {
             base.Seed(context);
+            var user1 = new ApplicationUser { UserName = "ania@o2.pl" };
+            var user2 = new ApplicationUser { UserName = "jan@o2.pl" };
+            var user3 = new ApplicationUser { UserName = "krzysio@o2.pl" };
+            string pass = "asdQWE123.";
+            
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-            //roleManager.Create(new IdentityRole("Admin"));
+            roleManager.Create(new IdentityRole("Administrator"));
             roleManager.Create(new IdentityRole("Dietetyk"));
             roleManager.Create(new IdentityRole("Klient"));
+
+            userManager.Create(user1, pass);
+            userManager.Create(user2, pass);
+            userManager.Create(user3, pass);
+
+            userManager.AddToRole(user1.Id, "Administrator");
+            userManager.AddToRole(user2.Id, "Dietetyk");
+            userManager.AddToRole(user3.Id, "Klient");
+
+
 
             var ingridient = new List<Ingridient>
             {
@@ -28,7 +43,7 @@ namespace BeFit.DAL
                 new Ingridient {Name = "Ziemniaki", EnergeticValue = 69, Fat = 0, Protein = 2, CarboHydrates = 16, MeasureRate = MeasureRate.g },
                 new Ingridient {Name = "Ryż", EnergeticValue = 344, Fat = 1, Protein = 7, CarboHydrates = 79, MeasureRate = MeasureRate.g},
                 new Ingridient {Name = "Pierś z kurczaka", EnergeticValue = 99, Fat = 1, Protein = 21, CarboHydrates = 0, MeasureRate = MeasureRate.g},
-                new Ingridient {Name ="Mleko 2%", EnergeticValue = 50, Fat = 2, Protein = 3, CarboHydrates = (float)4.8, MeasureRate = MeasureRate.ml}
+                new Ingridient {Name ="Mleko 2%", EnergeticValue = 50, Fat = 2, Protein = 3, CarboHydrates = (Decimal)4.8, MeasureRate = MeasureRate.ml}
             };
             ingridient.ForEach(i => context.Ingridients.Add(i));
             context.SaveChanges();
@@ -62,23 +77,21 @@ namespace BeFit.DAL
 
             var mealIngridient = new List<MealIngridient>
             {
-                new MealIngridient {Quantity = 100, Meal = meal[0], Ingridient = ingridient[2] },
-                new MealIngridient {Quantity = 200, Meal = meal[0], Ingridient = ingridient[3] },
-                new MealIngridient {Quantity = 250, Meal = meal[1], Ingridient = ingridient[4] },
-                new MealIngridient {Quantity = 35, Meal = meal[1], Ingridient = ingridient[1] }
+                new MealIngridient {Name = "Torebka ryżu", Quantity = 100, Meal = meal[0], Ingridient = ingridient[2] },
+                new MealIngridient {Name ="Pierś z kurczaka", Quantity = 200, Meal = meal[0], Ingridient = ingridient[3] },
+                new MealIngridient {Name = "Szklanka mleka", Quantity = 250, Meal = meal[1], Ingridient = ingridient[4] },
+                new MealIngridient {Name = "Garść orzechów", Quantity = 35, Meal = meal[1], Ingridient = ingridient[1] }
             };
             mealIngridient.ForEach(mi => context.MealIngridients.Add(mi));
             context.SaveChanges();
 
             var user = new List<User>
             {
-                new User { Email = "test@o2.pl", FirstName = "Anna", Surname = "Kowalska", DateOfBirth = DateTime.Parse("1998-10-10")},
-                new User { Email = "jan@o2.pl", FirstName = "Jan", Surname = "Nowak", DateOfBirth = DateTime.Parse("1990-12-01") },
-                new User { Email = "krzysio@o2.pl", FirstName = "Krzysztof", Surname = "Czajka", DateOfBirth = DateTime.Parse("1995-07-20")}
+                new User { Email = user1.UserName, FirstName = "Anna", Surname = "Kowalska", DateOfBirth = new DateTime(1998,10,10), roleName = userManager.GetRoles(user1.Id).FirstOrDefault().ToString()},
+                new User { Email = user2.UserName, FirstName = "Jan", Surname = "Nowak", DateOfBirth = new DateTime(1990,12,1), roleName = userManager.GetRoles(user2.Id).FirstOrDefault().ToString() },
+                new User { Email = user3.UserName, FirstName = "Krzysztof", Surname = "Czajka", DateOfBirth = new DateTime(1995,7,20), roleName = userManager.GetRoles(user3.Id).FirstOrDefault().ToString()}
                 
             };
-            string[] userNames = { user[0].Email, user[1].Email, user[2].Email };
-            Roles.AddUsersToRole(userNames, "Klient");
             user.ForEach(u => context.Users.Add(u));
             context.SaveChanges();
 
@@ -102,8 +115,8 @@ namespace BeFit.DAL
 
             var diet = new List<Diet>
             {
-                new Diet { Name = "Wiosenna", EnergeticValue = 1800, DateStart = DateTime.Parse("2020-10-11"), Duration = 30, AdditionalWarning = "Przygotownie posiłków jest bardzo proste, polecam", TypeOfDiet = dietType[2], Customer = user[0], Dietician = user[2]},
-                new Diet { Name = "Detoks", EnergeticValue = 1500, DateStart = DateTime.Parse("2020-11-12"), Duration = 7, DieticianOpinion = "świetny diettetyk, polecam", DieticianRate = 5, DietOpinion = "Bardzo smaczna", DietRate = 4, TypeOfDiet = dietType[2], Customer= user[1], Dietician = user[2]}
+                new Diet { Name = "Wiosenna", EnergeticValue = 1800, DateStart = new DateTime(2020, 10, 11), Duration = 30, AdditionalWarning = "Przygotownie posiłków jest bardzo proste, polecam", DieticianRate = 1, DietRate = 5, TypeOfDiet = dietType[2], Customer = user[0], Dietician = user[2]},
+                new Diet { Name = "Detoks", EnergeticValue = 1500, DateStart = new DateTime(2020, 11, 12), Duration = 7, DieticianOpinion = "świetny diettetyk, polecam", DieticianRate = 4, DietOpinion = "Bardzo smaczna", DietRate = 4, TypeOfDiet = dietType[2], Customer= user[1], Dietician = user[2]}
             };
             diet.ForEach(d => context.Diets.Add(d));
             context.SaveChanges();

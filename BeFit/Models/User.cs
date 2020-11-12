@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -10,15 +11,26 @@ namespace BeFit.Models
     public class User
     {
         public int Id { get; set; }
+
+        [Required]
         [Display(Name = "Adres email")]
         public string Email { get; set; }
+
         public string password_hash { get; set; }
+
+        [Required]
         [Display(Name = "Imię")]
         public string FirstName { get; set; }
+
+        [Required]
         [Display(Name = "Nazwisko")]
         public string Surname { get; set; }
+
         [Display(Name = "Usunięto")]
         public bool Deleted { get; set; }
+
+        [Display(Name = "Rola")]
+        public string roleName { get; set; }
 
         [Display(Name = "Data urodzenia")]
         [DataType(DataType.Date)]
