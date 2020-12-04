@@ -19,9 +19,11 @@ namespace BeFit.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        ApplicationDbContext context;
 
         public AccountController()
         {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -141,6 +143,7 @@ namespace BeFit.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Role = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrator")).ToList(), "Name", "Name");
             return View();
         }
 
@@ -159,10 +162,10 @@ namespace BeFit.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    User customer = new User { Email = model.Email, FirstName = model.FirstName, Surname = model.LastName, DateOfBirth = model.DateOfBirth };
+                    User customer = new User { Email = model.Email, FirstName = model.FirstName, Surname = model.LastName, DateOfBirth = model.DateOfBirth, roleName = model.UserRoles };
                     DietCenterContext db = new DietCenterContext();
-                    UserManager.AddToRole(user.Id, "Dietetyk");
-                    customer.roleName = UserManager.GetRoles(user.Id).FirstOrDefault().ToString();
+                    UserManager.AddToRole(user.Id, model.UserRoles);
+
                     db.Users.Add(customer);
                     db.SaveChanges();
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -173,6 +176,7 @@ namespace BeFit.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                //ViewBag.Role = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrator")).ToList(), "Name", "Name");
                 AddErrors(result);
             }
 

@@ -14,7 +14,6 @@ namespace BeFit.Controllers
     public class UsersController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
-
         // GET: Users
         public ActionResult Index()
         {

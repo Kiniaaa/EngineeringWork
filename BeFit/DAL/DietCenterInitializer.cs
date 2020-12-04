@@ -15,27 +15,29 @@ namespace BeFit.DAL
         protected override void Seed(DietCenterContext context)
         {
             base.Seed(context);
-            var user1 = new ApplicationUser { UserName = "ania@o2.pl" };
-            var user2 = new ApplicationUser { UserName = "jan@o2.pl" };
-            var user3 = new ApplicationUser { UserName = "krzysio@o2.pl" };
-            string pass = "asdQWE123.";
-            
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-            roleManager.Create(new IdentityRole("Administrator"));
-            roleManager.Create(new IdentityRole("Dietetyk"));
-            roleManager.Create(new IdentityRole("Klient"));
+            var user1 = new ApplicationUser { UserName = "maniek@gmail.com" };
+            var user2 = new ApplicationUser { UserName = "jaa@gmail.com" };
+            var user3 = new ApplicationUser { UserName = "jaa2@gmail.com" };
+            string pass = "Ala.ma.2.koty";
+            string pass2 = "Test1212.";
+
+            var userManager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var roleManager = new RoleManager<IdentityRole>(
+                new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+            roleManager.Create(new IdentityRole("Admin"));
+            roleManager.Create(new IdentityRole("User"));
+            roleManager.Create(new IdentityRole("testUser"));
 
             userManager.Create(user1, pass);
-            userManager.Create(user2, pass);
             userManager.Create(user3, pass);
+            userManager.Create(user2, pass2);
 
-            userManager.AddToRole(user1.Id, "Administrator");
-            userManager.AddToRole(user2.Id, "Dietetyk");
-            userManager.AddToRole(user3.Id, "Klient");
-
-
+            userManager.AddToRole(user2.Id, "Admin");
+            userManager.AddToRole(user1.Id, "User");
+            userManager.AddToRole(user3.Id, "testUser");
 
             var ingridient = new List<Ingridient>
             {
@@ -84,12 +86,14 @@ namespace BeFit.DAL
             };
             mealIngridient.ForEach(mi => context.MealIngridients.Add(mi));
             context.SaveChanges();
-
+            var roleId1 = user1.Roles.FirstOrDefault().RoleId;
+            var roleId2 = user2.Roles.FirstOrDefault().RoleId;
+            var roleId3 = user3.Roles.FirstOrDefault().RoleId;
             var user = new List<User>
             {
-                new User { Email = user1.UserName, FirstName = "Anna", Surname = "Kowalska", DateOfBirth = new DateTime(1998,10,10), roleName = userManager.GetRoles(user1.Id).FirstOrDefault().ToString()},
-                new User { Email = user2.UserName, FirstName = "Jan", Surname = "Nowak", DateOfBirth = new DateTime(1990,12,1), roleName = userManager.GetRoles(user2.Id).FirstOrDefault().ToString() },
-                new User { Email = user3.UserName, FirstName = "Krzysztof", Surname = "Czajka", DateOfBirth = new DateTime(1995,7,20), roleName = userManager.GetRoles(user3.Id).FirstOrDefault().ToString()}
+                new User { Email = user1.UserName, FirstName = "Anna", Surname = "Kowalska", DateOfBirth = new DateTime(1998,10,10), roleName = roleManager.Roles.FirstOrDefault(r => r.Id == roleId1).Name},
+                new User { Email = user2.UserName, FirstName = "Jan", Surname = "Nowak", DateOfBirth = new DateTime(1990,12,1), roleName = roleManager.Roles.FirstOrDefault(r => r.Id == roleId2).Name},
+                new User { Email = user3.UserName, FirstName = "Krzysztof", Surname = "Czajka", DateOfBirth = new DateTime(1995,7,20), roleName = roleManager.Roles.FirstOrDefault(r => r.Id == roleId3).Name}
                 
             };
             user.ForEach(u => context.Users.Add(u));
