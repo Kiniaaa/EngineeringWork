@@ -105,7 +105,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Meal.Name)
+                            @Html.ActionLink(item.Meal.Name.ToString(), "Details", "Meals", new { id = item.Meal.Id }, string.Empty)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Meal.Description)

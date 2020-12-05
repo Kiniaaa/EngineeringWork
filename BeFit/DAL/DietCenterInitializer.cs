@@ -84,7 +84,7 @@ namespace BeFit.DAL
                 new MealIngridient {Name = "Torebka ryżu", Quantity = 100, Meal = meal[0], Ingridient = ingridient[2] },
                 new MealIngridient {Name ="Pierś z kurczaka", Quantity = 200, Meal = meal[0], Ingridient = ingridient[3] },
                 new MealIngridient {Name = "Szklanka mleka", Quantity = 250, Meal = meal[1], Ingridient = ingridient[4] },
-                new MealIngridient {Name = "Garść orzechów", Quantity = 35, Meal = meal[1], Ingridient = ingridient[1] }
+                new MealIngridient {Name = "Garść orzechów", Quantity = 35, Meal = meal[1], Ingridient = ingridient[0] }
             };
             mealIngridient.ForEach(mi => context.MealIngridients.Add(mi));
             context.SaveChanges();
