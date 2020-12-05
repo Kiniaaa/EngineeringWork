@@ -26,6 +26,81 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.MealIngridients)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Składniki</th>
+                    <th>Ilość</th>
+                    <th>Jednostka miary</th>
+                    <th>Tłuszcz</th>
+                    <th>Białko</th>
+                    <th>Węglowodany</th>
+                    <th>Wartość energetyczna</th>
+                </tr>
+                @{ decimal fats = 0;
+                    decimal proteins = 0;
+                    decimal carbs = 0;
+                    decimal kcals = 0;
+                }
+                @foreach (var item in Model.MealIngridients)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ingridient.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ingridient.MeasureRate)
+                        </td>
+                        <td>
+                            @{decimal fat = (int)(item.Ingridient.Fat * (item.Quantity / 100)); }
+                            @Html.DisplayFor(modelItem => fat) g
+                        </td>
+                        <td>
+                            @{decimal protein = (decimal)(item.Ingridient.Protein * (item.Quantity / 100)); }
+                            @Html.DisplayFor(modelItem => protein) g
+                        </td>
+                        <td>
+                            @{decimal carbo = (decimal)(item.Ingridient.CarboHydrates * (item.Quantity / 100)); }
+                            @Html.DisplayFor(modelItem => carbo) g
+                        </td>
+                        <td>
+                            @{int kcal = (int)(item.Ingridient.EnergeticValue * (item.Quantity / 100)); }
+                            @Html.DisplayFor(modelItem => kcal) kcal
+                        </td>
+                    </tr>
+                        fats += fat;
+                        proteins += protein;
+                        carbs += carbo;
+                        kcals += kcal;
+                }
+                <tfoot>
+                    <tr>
+                        <td>Łącznie:</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => fats) g
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => proteins) g
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => carbs) g
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => kcals) kcal
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </dd>
     </dl>
 </div>
 <p>

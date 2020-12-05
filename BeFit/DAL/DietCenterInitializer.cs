@@ -43,11 +43,11 @@ namespace BeFit.DAL
 
             var ingridient = new List<Ingridient>
             {
-                new Ingridient {Name = "Orzechy laskowe", EnergeticValue = 628, Fat = 60, Protein = 15, CarboHydrates = 17, MeasureRate = MeasureRate.g },
-                new Ingridient {Name = "Ziemniaki", EnergeticValue = 69, Fat = 0, Protein = 2, CarboHydrates = 16, MeasureRate = MeasureRate.g },
-                new Ingridient {Name = "Ryż", EnergeticValue = 344, Fat = 1, Protein = 7, CarboHydrates = 79, MeasureRate = MeasureRate.g},
-                new Ingridient {Name = "Pierś z kurczaka", EnergeticValue = 99, Fat = 1, Protein = 21, CarboHydrates = 0, MeasureRate = MeasureRate.g},
-                new Ingridient {Name ="Mleko 2%", EnergeticValue = 50, Fat = 2, Protein = 3, CarboHydrates = (Decimal)4.8, MeasureRate = MeasureRate.ml}
+                new Ingridient {Name = "Orzechy laskowe", EnergeticValue = 628, Fat = 60, Protein = 15, CarboHydrates = 17, MeasureRate = MeasureRate.gramy },
+                new Ingridient {Name = "Ziemniaki", EnergeticValue = 69, Fat = 0, Protein = 2, CarboHydrates = 16, MeasureRate = MeasureRate.gramy },
+                new Ingridient {Name = "Ryż", EnergeticValue = 344, Fat = 1, Protein = 7, CarboHydrates = 79, MeasureRate = MeasureRate.gramy},
+                new Ingridient {Name = "Pierś z kurczaka", EnergeticValue = 99, Fat = 1, Protein = 21, CarboHydrates = 0, MeasureRate = MeasureRate.gramy},
+                new Ingridient {Name ="Mleko 2%", EnergeticValue = 50, Fat = 2, Protein = 3, CarboHydrates = (Decimal)4.8, MeasureRate = MeasureRate.mililitry}
             };
             ingridient.ForEach(i => context.Ingridients.Add(i));
             context.SaveChanges();

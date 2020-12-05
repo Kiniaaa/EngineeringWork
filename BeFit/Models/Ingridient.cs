@@ -46,6 +46,6 @@ namespace BeFit.Models
     }
     public enum MeasureRate
     {
-        g, ml
+        gramy, mililitry
     }
 }

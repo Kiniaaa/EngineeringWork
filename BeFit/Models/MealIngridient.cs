@@ -15,7 +15,7 @@ namespace BeFit.Models
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Jednostka miary")]
+        [Display(Name = "Ilość")]
         public int Quantity { get; set; }
         public int MealId { get; set; }
         public int IngridientId { get; set; }
