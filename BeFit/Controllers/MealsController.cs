@@ -8,13 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using BeFit.DAL;
 using BeFit.Models;
+using BeFit.ViewModel;
 
 namespace BeFit.Controllers
 {
     public class MealsController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
-
         // GET: Meals
         public ActionResult Index()
         {
@@ -39,6 +39,7 @@ namespace BeFit.Controllers
         // GET: Meals/Create
         public ActionResult Create()
         {
+            ViewBag.MealIngridients = new MultiSelectList(db.MealIngridients.ToList(), "Id", "Name");
             return View();
         }
 
@@ -47,16 +48,22 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Meal meal)
+        public ActionResult Create(MealViewModel mealView)
         {
             if (ModelState.IsValid)
             {
+                var meal = new Meal() { Name = mealView.Name, Description = mealView.Description };
                 db.Meals.Add(meal);
+                db.SaveChanges();
+                foreach (var m in mealView.MealsIngridientsId)
+                {
+                    db.MealIngridients.FirstOrDefault(i => i.Id == m).MealId = meal.Id;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(meal);
+            return View(mealView);
         }
 
         // GET: Meals/Edit/5

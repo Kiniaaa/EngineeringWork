@@ -226,6 +226,7 @@
     <Compile Include="RESTControllers\TypeOfMealsController.cs" />
     <Compile Include="RESTControllers\UsersController.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\MealViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
