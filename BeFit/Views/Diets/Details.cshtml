@@ -90,6 +90,32 @@
             @Html.DisplayFor(model => model.AdditionalWarning)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.DietMeals)
+        </dt>
+
+        <dd>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                </tr>
+                @foreach (var item in Model.DietMeals)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Meal.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Meal.Description)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        </dd>
+
     </dl>
 </div>
 <p>

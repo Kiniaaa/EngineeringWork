@@ -10,34 +10,36 @@ using System.Web.Security;
 
 namespace BeFit.DAL
 {
-    public class DietCenterInitializer : DropCreateDatabaseAlways<DietCenterContext>
+    public class DietCenterInitializer : DropCreateDatabaseIfModelChanges<DietCenterContext>
     {
         protected override void Seed(DietCenterContext context)
         {
             base.Seed(context);
 
-            var user1 = new ApplicationUser { UserName = "maniek@gmail.com" };
-            var user2 = new ApplicationUser { UserName = "jaa@gmail.com" };
-            var user3 = new ApplicationUser { UserName = "jaa2@gmail.com" };
-            string pass = "Ala.ma.2.koty";
-            string pass2 = "Test1212.";
+            var user0 = new ApplicationUser { UserName = "kinia@gmail.com" };
+            var user1 = new ApplicationUser { UserName = "ania@gmail.com" };
+            var user2 = new ApplicationUser { UserName = "janek@gmail.com" };
+            var user3 = new ApplicationUser { UserName = "krzysio@gmail.com" };
+            string pass = "asdQWE123.";
 
             var userManager = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var roleManager = new RoleManager<IdentityRole>(
                 new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
-            roleManager.Create(new IdentityRole("Admin"));
-            roleManager.Create(new IdentityRole("User"));
-            roleManager.Create(new IdentityRole("testUser"));
+            roleManager.Create(new IdentityRole("Administrator"));
+            roleManager.Create(new IdentityRole("Dietetyk"));
+            roleManager.Create(new IdentityRole("Klient"));
 
+            userManager.Create(user0, pass);
             userManager.Create(user1, pass);
             userManager.Create(user3, pass);
-            userManager.Create(user2, pass2);
+            userManager.Create(user2, pass);
 
-            userManager.AddToRole(user2.Id, "Admin");
-            userManager.AddToRole(user1.Id, "User");
-            userManager.AddToRole(user3.Id, "testUser");
+            userManager.AddToRole(user0.Id, "Administrator");
+            userManager.AddToRole(user1.Id, "Klient");
+            userManager.AddToRole(user2.Id, "Klient");
+            userManager.AddToRole(user3.Id, "Dietetyk");
 
             var ingridient = new List<Ingridient>
             {
@@ -86,12 +88,14 @@ namespace BeFit.DAL
             };
             mealIngridient.ForEach(mi => context.MealIngridients.Add(mi));
             context.SaveChanges();
+            var roleId0 = user0.Roles.FirstOrDefault().RoleId;
             var roleId1 = user1.Roles.FirstOrDefault().RoleId;
             var roleId2 = user2.Roles.FirstOrDefault().RoleId;
             var roleId3 = user3.Roles.FirstOrDefault().RoleId;
             var user = new List<User>
             {
-                new User { Email = user1.UserName, FirstName = "Anna", Surname = "Kowalska", DateOfBirth = new DateTime(1998,10,10), roleName = roleManager.Roles.FirstOrDefault(r => r.Id == roleId1).Name},
+                new User { Email = user0.UserName, FirstName = "Kinga", Surname = "Mikołajczuk", DateOfBirth = new DateTime(1998,10,10), roleName = roleManager.Roles.FirstOrDefault(r => r.Id == roleId0).Name},
+                new User { Email = user1.UserName, FirstName = "Anna", Surname = "Kowalska", DateOfBirth = new DateTime(1998,10,17), roleName = roleManager.Roles.FirstOrDefault(r => r.Id == roleId1).Name},
                 new User { Email = user2.UserName, FirstName = "Jan", Surname = "Nowak", DateOfBirth = new DateTime(1990,12,1), roleName = roleManager.Roles.FirstOrDefault(r => r.Id == roleId2).Name},
                 new User { Email = user3.UserName, FirstName = "Krzysztof", Surname = "Czajka", DateOfBirth = new DateTime(1995,7,20), roleName = roleManager.Roles.FirstOrDefault(r => r.Id == roleId3).Name}
                 
@@ -120,7 +124,7 @@ namespace BeFit.DAL
             var diet = new List<Diet>
             {
                 new Diet { Name = "Wiosenna", EnergeticValue = 1800, DateStart = new DateTime(2020, 10, 11), Duration = 30, AdditionalWarning = "Przygotownie posiłków jest bardzo proste, polecam", DieticianRate = 1, DietRate = 5, TypeOfDiet = dietType[2], Customer = user[0], Dietician = user[2]},
-                new Diet { Name = "Detoks", EnergeticValue = 1500, DateStart = new DateTime(2020, 11, 12), Duration = 7, DieticianOpinion = "świetny diettetyk, polecam", DieticianRate = 4, DietOpinion = "Bardzo smaczna", DietRate = 4, TypeOfDiet = dietType[2], Customer= user[1], Dietician = user[2]}
+                new Diet { Name = "Detoks", EnergeticValue = 1500, DateStart = new DateTime(2020, 11, 12), Duration = 7, DieticianOpinion = "świetny dietetyk, polecam", DieticianRate = 4, DietOpinion = "Bardzo smaczna", DietRate = 4, TypeOfDiet = dietType[2], Customer= user[1], Dietician = user[2]}
             };
             diet.ForEach(d => context.Diets.Add(d));
             context.SaveChanges();
