@@ -20,7 +20,7 @@ namespace BeFit.Models
 
         [Display(Name = "Składniki posiłku")]
         [JsonIgnore]
-        public virtual List<MealIngridient> MealIngridients { get; set; }
+        public virtual List<MealIngridientMeal> MealIngridientMeals { get; set; }
 
         [Display(Name = "Posiłek diety")]
         [JsonIgnore]

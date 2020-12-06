@@ -18,7 +18,9 @@ namespace BeFit.Controllers
         // GET: MealIngridients
         public ActionResult Index()
         {
-            var mealIngridients = db.MealIngridients.Include(m => m.Ingridient).Include(m => m.Meal);
+            var mealIngridients = db.MealIngridients
+                .Include(m => m.Ingridient)
+                .Include(m => m.MealIngridientMeals);
             return View(mealIngridients.ToList());
         }
 
@@ -60,7 +62,7 @@ namespace BeFit.Controllers
             }
 
             ViewBag.IngridientId = new SelectList(db.Ingridients, "Id", "Name", mealIngridient.IngridientId);
-            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealIngridient.MealId);
+            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealIngridient.MealIngridientMeals);
             return View(mealIngridient);
         }
 
@@ -77,7 +79,7 @@ namespace BeFit.Controllers
                 return HttpNotFound();
             }
             ViewBag.IngridientId = new SelectList(db.Ingridients, "Id", "Name", mealIngridient.IngridientId);
-            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealIngridient.MealId);
+            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealIngridient.MealIngridientMeals.FirstOrDefault(m => m.MealIngridientId == mealIngridient.Id).MealId);
             return View(mealIngridient);
         }
 
@@ -95,7 +97,7 @@ namespace BeFit.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IngridientId = new SelectList(db.Ingridients, "Id", "Name", mealIngridient.IngridientId);
-            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealIngridient.MealId);
+            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealIngridient.MealIngridientMeals.FirstOrDefault(m => m.MealIngridientId == mealIngridient.Id).MealId);
             return View(mealIngridient);
         }
 

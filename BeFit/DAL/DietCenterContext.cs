@@ -19,6 +19,7 @@ namespace BeFit.DAL
         public DbSet<Ingridient> Ingridients { get; set; }
         public DbSet<Meal> Meals { get; set; }
         public DbSet<MealIngridient> MealIngridients { get; set; }
+        public DbSet<MealIngridientMeal> MealIngridientMeals { get; set; }
         public DbSet<MealOpinion> MealOpinions { get; set; }
         public DbSet<PhysicalActivity> PhysicalActivities { get; set; }
         public DbSet<TypeOfDiet> TypeOfDiets { get; set; }

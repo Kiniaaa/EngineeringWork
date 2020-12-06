@@ -17,16 +17,16 @@ namespace BeFit.Models
         [Required]
         [Display(Name = "Ilość")]
         public int Quantity { get; set; }
-        public int MealId { get; set; }
         public int IngridientId { get; set; }
-
-        [Display(Name ="Posiłki")]
-        [JsonIgnore]
-        public virtual Meal Meal { get; set; }
 
         [Display(Name ="Składniki")]
         [JsonIgnore]
         public virtual Ingridient Ingridient { get; set; }
+
+        [Display(Name = "Składniki posiłku")]
+        [JsonIgnore]
+        public virtual List<MealIngridientMeal> MealIngridientMeals { get; set; }
+
 
     }
 }

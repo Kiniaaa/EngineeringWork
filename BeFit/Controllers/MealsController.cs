@@ -39,7 +39,7 @@ namespace BeFit.Controllers
         // GET: Meals/Create
         public ActionResult Create()
         {
-            ViewBag.MealIngridients = new MultiSelectList(db.MealIngridients.ToList(), "Id", "Name");
+            ViewBag.MealIngridients = new MultiSelectList(db.MealIngridients.Distinct().ToList(), "Id", "Name");
             return View();
         }
 
@@ -56,9 +56,7 @@ namespace BeFit.Controllers
                 db.Meals.Add(meal);
                 db.SaveChanges();
                 foreach (var m in mealView.MealsIngridientsId)
-                {
-                    db.MealIngridients.FirstOrDefault(i => i.Id == m).MealId = meal.Id;
-                }
+                    db.MealIngridientMeals.Add(new MealIngridientMeal() { MealId = meal.Id, MealIngridientId = m });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

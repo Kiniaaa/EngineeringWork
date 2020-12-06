@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace BeFit.DAL
 {
-    public class DietCenterInitializer : DropCreateDatabaseIfModelChanges<DietCenterContext>
+    public class DietCenterInitializer : DropCreateDatabaseAlways<DietCenterContext>
     {
         protected override void Seed(DietCenterContext context)
         {
@@ -81,13 +81,24 @@ namespace BeFit.DAL
 
             var mealIngridient = new List<MealIngridient>
             {
-                new MealIngridient {Name = "Torebka ryżu", Quantity = 100, Meal = meal[0], Ingridient = ingridient[2] },
-                new MealIngridient {Name ="Pierś z kurczaka", Quantity = 200, Meal = meal[0], Ingridient = ingridient[3] },
-                new MealIngridient {Name = "Szklanka mleka", Quantity = 250, Meal = meal[1], Ingridient = ingridient[4] },
-                new MealIngridient {Name = "Garść orzechów", Quantity = 35, Meal = meal[1], Ingridient = ingridient[0] }
+                new MealIngridient {Name = "Torebka ryżu", Quantity = 100, Ingridient = ingridient[2] },
+                new MealIngridient {Name ="Pierś z kurczaka", Quantity = 200, Ingridient = ingridient[3] },
+                new MealIngridient {Name = "Szklanka mleka", Quantity = 250, Ingridient = ingridient[4] },
+                new MealIngridient {Name = "Garść orzechów", Quantity = 35, Ingridient = ingridient[0] }
             };
             mealIngridient.ForEach(mi => context.MealIngridients.Add(mi));
             context.SaveChanges();
+
+            var mealIngridientMeal = new List<MealIngridientMeal>
+            {
+                new MealIngridientMeal {Meal = meal[0], MealIngridient = mealIngridient[0]},
+                new MealIngridientMeal {Meal = meal[0], MealIngridient = mealIngridient[1]},
+                new MealIngridientMeal {Meal = meal[1], MealIngridient = mealIngridient[2]},
+                new MealIngridientMeal {Meal = meal[1], MealIngridient = mealIngridient[3]}
+            };
+            mealIngridientMeal.ForEach(mim => context.MealIngridientMeals.Add(mim));
+            context.SaveChanges();
+
             var roleId0 = user0.Roles.FirstOrDefault().RoleId;
             var roleId1 = user1.Roles.FirstOrDefault().RoleId;
             var roleId2 = user2.Roles.FirstOrDefault().RoleId;
