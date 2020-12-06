@@ -77,7 +77,15 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
-            return View(meal);
+            var mealView = new MealViewModel()
+            {
+                Id = meal.Id,
+                Name = meal.Name,
+                Description = meal.Description
+            };
+            var multiList = new MultiSelectList(db.MealIngridients.ToList(), "Id", "Name", meal.MealIngridientMeals.Where(x => x.MealId == meal.Id).Select(x => x.MealIngridientId).ToList());
+            ViewBag.MealIngridients = multiList;
+            return View(mealView);
         }
 
         // POST: Meals/Edit/5
@@ -85,15 +93,25 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Meal meal)
+        public ActionResult Edit(MealViewModel mealView)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(meal).State = EntityState.Modified;
+                var meal = db.Meals.FirstOrDefault(m => m.Id == mealView.Id);
+                meal.Id = mealView.Id;
+                meal.Name = mealView.Name;
+                meal.Description = mealView.Description;
+                var mealIngridientMealToRemove = new List<MealIngridientMeal>();
+                foreach (var m in meal.MealIngridientMeals.Where(x => x.MealId == meal.Id))
+                    mealIngridientMealToRemove.Add(m);
+                foreach (var m in mealIngridientMealToRemove)
+                    db.MealIngridientMeals.Remove(m);
+                foreach (var m in mealView.MealsIngridientsId)
+                    db.MealIngridientMeals.Add(new MealIngridientMeal() { MealId = meal.Id, MealIngridientId = m });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(meal);
+            return View(mealView);
         }
 
         // GET: Meals/Delete/5

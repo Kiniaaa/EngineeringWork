@@ -11,22 +11,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Ingridient.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ingridient.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Meal.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Meal.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
@@ -40,6 +24,47 @@
 
         <dd>
             @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingridient)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Nazwa składnika</th>
+                    <th>Jednostka miary</th>
+                    <th>Tłuszcz</th>
+                    <th>Białko</th>
+                    <th>Węglowodany</th>
+                    <th>Wartość energetyczna</th>
+                </tr>
+                @{decimal fat = (int)(Model.Ingridient.Fat * (Model.Quantity / 100)); }
+                @{decimal protein = (decimal)(Model.Ingridient.Protein * (Model.Quantity / 100)); }
+                @{decimal carbo = (decimal)(Model.Ingridient.CarboHydrates * (Model.Quantity / 100)); }
+                @{int kcal = (int)(Model.Ingridient.EnergeticValue * (Model.Quantity / 100)); }
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Ingridient.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Ingridient.MeasureRate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => fat) g
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => protein) g
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => carbo) g
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => kcal) kcal
+                    </td>
+                </tr>
+            </table>
         </dd>
 
     </dl>

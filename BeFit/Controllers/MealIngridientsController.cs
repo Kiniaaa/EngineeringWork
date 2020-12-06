@@ -80,7 +80,6 @@ namespace BeFit.Controllers
                 return HttpNotFound();
             }
             ViewBag.IngridientId = new SelectList(db.Ingridients, "Id", "Name", mealIngridient.IngridientId);
-            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealIngridient.MealIngridientMeals.FirstOrDefault(m => m.MealIngridientId == mealIngridient.Id).MealId);
             return View(mealIngridient);
         }
 
@@ -98,7 +97,6 @@ namespace BeFit.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IngridientId = new SelectList(db.Ingridients, "Id", "Name", mealIngridient.IngridientId);
-            ViewBag.MealId = new SelectList(db.Meals, "Id", "Name", mealIngridient.MealIngridientMeals.FirstOrDefault(m => m.MealIngridientId == mealIngridient.Id).MealId);
             return View(mealIngridient);
         }
 

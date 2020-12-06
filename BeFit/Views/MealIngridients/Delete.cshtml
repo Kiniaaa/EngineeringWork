@@ -12,22 +12,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Ingridient.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ingridient.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Meal.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Meal.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
@@ -42,7 +26,13 @@
         <dd>
             @Html.DisplayFor(model => model.Quantity)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingridient.Name)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Ingridient.Name)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {
