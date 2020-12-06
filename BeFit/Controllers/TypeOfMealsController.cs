@@ -11,7 +11,7 @@ using BeFit.Models;
 
 namespace BeFit.Controllers
 {
-    [Authorize(Roles = "Administrator, Dietetyk")]
+    [Authorize]
     public class TypeOfMealsController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
