@@ -9,6 +9,7 @@
 <div>
     <h4>User</h4>
     <hr />
+    @Html.HiddenFor(model => model.password_hash)
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Email)
@@ -16,14 +17,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.password_hash)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.password_hash)
         </dd>
 
         <dt>
@@ -67,6 +60,103 @@
         </dd>
 
     </dl>
+
+    @if (Model.roleName == "Klient")
+    {
+        <h3>Pomiary</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Wzrost</th>
+                    <th>Waga</th>
+                    <th>Data pomiaru</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CustomerDatas)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Growth)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfMeasurement)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h3>Aktywność fizyczna</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nazwa aktywności</th>
+                    <th>Liczba splanonych kalorii</th>
+                    <th>Data aktywności</th>
+                    <th>Opis</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PhysicalActivities)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CaloriessBurned)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateActivity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h3>
+            Wystawione opinie
+        </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Posiłek</th>
+                    <th>Ocena</th>
+                    <th>Opis</th>
+                    <th>Data wystawienia opinii</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.MealOpinions)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Meal.Name.ToString(), "Details", "Meals", new { id = item.Meal.Id }, string.Empty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MealRate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOpinion)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        
+
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

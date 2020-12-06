@@ -106,17 +106,17 @@ namespace BeFit.DAL
 
             var customerData = new List<CustomerData>
             {
-                new CustomerData { Weight = 55, Growth = 165, DateOfMeasurement = DateTime.Parse("2020-10-12"), Customer = user[0] },
-                new CustomerData { Weight = 50, Growth = 165, DateOfMeasurement = DateTime.Parse("2020-11-12"), Customer = user[0] },
-                new CustomerData { Weight = 100, Growth = 184, DateOfMeasurement = DateTime.Parse("2020-09-03"), Customer = user[1] }
+                new CustomerData { Weight = 55, Growth = 165, DateOfMeasurement = DateTime.Parse("2020-10-12"), Customer = user[1] },
+                new CustomerData { Weight = 50, Growth = 165, DateOfMeasurement = DateTime.Parse("2020-11-12"), Customer = user[1] },
+                new CustomerData { Weight = 100, Growth = 184, DateOfMeasurement = DateTime.Parse("2020-09-03"), Customer = user[2] }
             };
             customerData.ForEach(cd => context.CustomerDatas.Add(cd));
             context.SaveChanges();
 
             var physicalActivity = new List<PhysicalActivity>
             {
-                new PhysicalActivity { Name = "Bieganie", CaloriessBurned = 200, DateActivity = DateTime.Parse("2020-10-15"), Description="Bieganie na bieżni przez 30 minut", Customer = user[1]},
-                new PhysicalActivity {Name = "Siłownia", CaloriessBurned = 400, DateActivity = DateTime.Parse("2020-09-10"), Customer = user[0]}
+                new PhysicalActivity { Name = "Bieganie", CaloriessBurned = 200, DateActivity = DateTime.Parse("2020-10-15"), Description="Bieganie na bieżni przez 30 minut", Customer = user[2]},
+                new PhysicalActivity {Name = "Siłownia", CaloriessBurned = 400, DateActivity = DateTime.Parse("2020-09-10"), Customer = user[1]}
             };
             physicalActivity.ForEach(pa => context.PhysicalActivities.Add(pa));
             context.SaveChanges();
@@ -141,7 +141,7 @@ namespace BeFit.DAL
 
             var mealOpinion = new List<MealOpinion>
             {
-                new MealOpinion { MealRate = 3, DateOpinion = DateTime.Parse("2020-10-20"), Description = "Całkiem niezły", Customer = user[0], Meal = meal[0], DietMeal = dietMeal[0]}
+                new MealOpinion { MealRate = 3, DateOpinion = DateTime.Parse("2020-10-20"), Description = "Całkiem niezły", Customer = user[1], Meal = meal[0], DietMeal = dietMeal[0]}
             };
             mealOpinion.ForEach(mo => context.MealOpinions.Add(mo));
             context.SaveChanges();
