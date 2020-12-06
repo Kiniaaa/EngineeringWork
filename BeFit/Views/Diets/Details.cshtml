@@ -136,7 +136,9 @@
                 }
             </table>
         </dd>
-        </dd>
+
+        @Html.ActionLink("Dodaj posiłek", "Create", "DietMeals", new { id = Model.Id }, string.Empty)
+
 
     </dl>
 </div>

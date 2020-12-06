@@ -39,12 +39,11 @@ namespace BeFit.Controllers
         }
 
         // GET: DietMeals/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.DietId = new SelectList(db.Diets, "Id", "Name");
             ViewBag.MealId = new SelectList(db.Meals, "Id", "Name");
             ViewBag.TypeOfMealId = new SelectList(db.TypeOfMeals, "Id", "Name");
-            return View();
+            return View(new DietMeal() { DietId = (int)id });
         }
 
         // POST: DietMeals/Create
@@ -52,13 +51,13 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DateOfEating,DietId,MealId,TypeOfMealId")] DietMeal dietMeal)
+        public ActionResult Create([Bind(Include = "Id,DietId,MealId,TypeOfMealId")] DietMeal dietMeal)
         {
             if (ModelState.IsValid)
             {
                 db.DietMeals.Add(dietMeal);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction($"Details/{dietMeal.DietId}", "Diets");
             }
 
             ViewBag.DietId = new SelectList(db.Diets, "Id", "Name", dietMeal.DietId);

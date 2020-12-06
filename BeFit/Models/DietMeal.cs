@@ -11,11 +11,10 @@ namespace BeFit.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [Display(Name = "Data i godzina zjedzenia posiłku")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd H:mm:ss}", ApplyFormatInEditMode = true)]
-        public DateTime DateOfEating { get; set; }
+        public DateTime? DateOfEating { get; set; }
 
         public int DietId { get; set; }
         public int MealId { get; set; }
