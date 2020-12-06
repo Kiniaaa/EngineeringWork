@@ -154,8 +154,27 @@
             </tbody>
         </table>
 
-        
-
+        <h3>Diety</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Zakończone diety</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Diets)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateStart)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>      
     }
 </div>
 <p>

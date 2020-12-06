@@ -123,8 +123,8 @@ namespace BeFit.DAL
 
             var diet = new List<Diet>
             {
-                new Diet { Name = "Wiosenna", EnergeticValue = 1800, DateStart = new DateTime(2020, 10, 11), Duration = 30, AdditionalWarning = "Przygotownie posiłków jest bardzo proste, polecam", DieticianRate = 1, DietRate = 5, TypeOfDiet = dietType[2], Customer = user[0], Dietician = user[2]},
-                new Diet { Name = "Detoks", EnergeticValue = 1500, DateStart = new DateTime(2020, 11, 12), Duration = 7, DieticianOpinion = "świetny dietetyk, polecam", DieticianRate = 4, DietOpinion = "Bardzo smaczna", DietRate = 4, TypeOfDiet = dietType[2], Customer= user[1], Dietician = user[2]}
+                new Diet { Name = "Wiosenna", EnergeticValue = 1800, DateStart = new DateTime(2020, 10, 11), Duration = 30, AdditionalWarning = "Przygotownie posiłków jest bardzo proste, polecam", DieticianRate = 1, DietRate = 5, TypeOfDiet = dietType[2], Customer = user[1], Dietician = user[3]},
+                new Diet { Name = "Detoks", EnergeticValue = 1500, DateStart = new DateTime(2020, 11, 12), Duration = 7, DieticianOpinion = "świetny dietetyk, polecam", DieticianRate = 4, DietOpinion = "Bardzo smaczna", DietRate = 4, TypeOfDiet = dietType[2], Customer= user[2], Dietician = user[3]}
             };
             diet.ForEach(d => context.Diets.Add(d));
             context.SaveChanges();
