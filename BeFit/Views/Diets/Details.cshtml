@@ -11,6 +11,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.Surname)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Email)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.TypeOfDiet.Name)
         </dt>
 
@@ -48,6 +61,15 @@
 
         <dd>
             @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dietician)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dietician.FirstName)
+            @Html.DisplayFor(model => model.Dietician.Surname)
         </dd>
 
         <dt>

@@ -11,12 +11,23 @@ using BeFit.Models;
 
 namespace BeFit.Controllers
 {
+    //[Authorize(Roles = "Administrator, Dietetyk")]
     public class UsersController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
         // GET: Users
         public ActionResult Index()
         {
+            /*List<User> users;
+            if(User.IsInRole("Administartor"))
+            {
+                users = db.Users.Where(u => u.roleName.Contains("Klient")).ToList();
+            }
+            else 
+            {
+                users = db.Users.ToList();
+            }
+            return View(users);*/
             return View(db.Users.ToList());
         }
 
@@ -32,6 +43,7 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Diets = db.Diets.Where(d => d.Customer.Id == id).ToList();
             return View(user);
         }
 
@@ -44,6 +56,7 @@ namespace BeFit.Controllers
         // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Email,password_hash,FirstName,Surname,Deleted,roleName,DateOfBirth")] User user)
@@ -76,6 +89,7 @@ namespace BeFit.Controllers
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email,password_hash,FirstName,Surname,Deleted,roleName,DateOfBirth")] User user)
@@ -105,6 +119,7 @@ namespace BeFit.Controllers
         }
 
         // POST: Users/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

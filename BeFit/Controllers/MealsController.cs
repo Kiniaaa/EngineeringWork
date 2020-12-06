@@ -12,6 +12,7 @@ using BeFit.ViewModel;
 
 namespace BeFit.Controllers
 {
+    [Authorize(Roles = "Administrator, Dietetyk")]
     public class MealsController : Controller
     {
         private DietCenterContext db = new DietCenterContext();

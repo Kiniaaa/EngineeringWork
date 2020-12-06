@@ -12,7 +12,7 @@ namespace BeFit.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Nazwa")]
+        [Display(Name = "Typ diety")]
         public string Name { get; set; }
 
         [Display(Name = "Opis")]
