@@ -43,7 +43,8 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Diets = db.Diets.Where(d => d.Customer.Id == id).ToList();
+            ViewBag.DietsCustomer = db.Diets.Where(d => d.Customer.Id == id).ToList();
+            ViewBag.DietsDietician = db.Diets.Where(d => d.Dietician.Id == id).ToList();
             return View(user);
         }
 

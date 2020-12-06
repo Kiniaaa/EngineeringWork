@@ -145,15 +145,20 @@
             <thead>
                 <tr>
                     <th>Nazwa</th>
+                    <th>Dietetyk</th>
                     <th>Data zakończenia diety</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in (List<BeFit.Models.Diet>)ViewBag.Diets)
+                @foreach (var item in (List<BeFit.Models.Diet>)ViewBag.DietsCustomer)
                 {
                     <tr>
                         <td>
                             @Html.ActionLink(item.Name.ToString(), "Details", "Diets", new { id = item.Id }, string.Empty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dietician.FirstName)
+                            @Html.DisplayFor(modelItem => item.Dietician.Surname)
                         </td>
                         <td>
                             @{ DateTime endDate = item.DateStart.AddDays(item.Duration);}
@@ -162,7 +167,60 @@
                     </tr>
                 }
             </tbody>
-        </table>      
+        </table>
+    }
+
+    @if (Model.roleName == "Dietetyk")
+    {
+        <h3>Diety</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Klient</th>
+                    <th>Data zakończenia</th>
+                    <th>Ocena dietetyka</th>
+                    <th>Ocena dietety</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in (List<BeFit.Models.Diet>)ViewBag.DietsDietician)
+                {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Name.ToString(), "Details", "Diets", new { id = item.Id }, string.Empty)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Customer.FirstName + " " + item.Customer.Surname, "Details", "Users", new { id = item.Customer.Id }, string.Empty)
+                    </td>
+                    <td>
+                        @{ DateTime endDate = item.DateStart.AddDays(item.Duration);}
+                        @Html.DisplayFor(modelItem => endDate)
+                    </td>
+                    <td>
+                        @if (endDate < DateTime.Now && item.DieticianRate > 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.DieticianRate)
+                        }
+                        else
+                        {
+                            @Html.Display("Brak oceny")
+                        }
+                    </td>
+                    <td>
+                        @if (endDate < DateTime.Now && item.DieticianRate > 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.DieticianRate)
+                        }
+                        else
+                        {
+                            @Html.Display("Brak oceny")
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
     }
 </div>
 <p>
