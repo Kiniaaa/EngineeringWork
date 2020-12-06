@@ -82,10 +82,7 @@ namespace BeFit.Controllers
                 Name = meal.Name,
                 Description = meal.Description
             };
-            var multiList = new MultiSelectList(db.MealIngridients.ToList(), "Id", "Name");
-            foreach (var m in meal.MealIngridients)
-                mealView.MealsIngridientsId.Add(m.Id);
-            
+            var multiList = new MultiSelectList(db.MealIngridients.ToList(), "Id", "Name", meal.MealIngridientMeals.Where(x => x.MealId == meal.Id).Select(x => x.MealIngridientId).ToList());
             ViewBag.MealIngridients = multiList;
             return View(mealView);
         }
@@ -100,12 +97,16 @@ namespace BeFit.Controllers
             if (ModelState.IsValid)
             {
                 var meal = db.Meals.FirstOrDefault(m => m.Id == mealView.Id);
+                meal.Id = mealView.Id;
                 meal.Name = mealView.Name;
                 meal.Description = mealView.Description;
-                foreach (var m in meal.MealIngridients)
-                    db.MealIngridients.FirstOrDefault(i => i.Id == m.Id).MealId = 0;
+                var mealIngridientMealToRemove = new List<MealIngridientMeal>();
+                foreach (var m in meal.MealIngridientMeals.Where(x => x.MealId == meal.Id))
+                    mealIngridientMealToRemove.Add(m);
+                foreach (var m in mealIngridientMealToRemove)
+                    db.MealIngridientMeals.Remove(m);
                 foreach (var m in mealView.MealsIngridientsId)
-                    db.MealIngridients.FirstOrDefault(i => i.Id == m).MealId = meal.Id;
+                    db.MealIngridientMeals.Add(new MealIngridientMeal() { MealId = meal.Id, MealIngridientId = m });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
