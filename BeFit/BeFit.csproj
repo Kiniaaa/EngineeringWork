@@ -224,6 +224,7 @@
     <Compile Include="RESTControllers\MealIngridientsController.cs" />
     <Compile Include="RESTControllers\MealOpinionsController.cs" />
     <Compile Include="RESTControllers\MealsController.cs" />
+    <Compile Include="RESTControllers\MessagesController.cs" />
     <Compile Include="RESTControllers\PhysicalActivitiesController.cs" />
     <Compile Include="RESTControllers\TypeOfDietsController.cs" />
     <Compile Include="RESTControllers\TypeOfMealsController.cs" />
