@@ -1,10 +1,10 @@
 ﻿@model BeFit.Models.MealIngridient
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edycja składnika";
 }
 
-<h2>Edit</h2>
+<h2>Edycja składnika</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>MealIngridient</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -34,7 +33,14 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IngridientId, "IngridientId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ingridient.MeasureRate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Ingridient.MeasureRate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IngridientId, "Produkt", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IngridientId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.IngridientId, "", new { @class = "text-danger" })
@@ -43,14 +49,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do listy składników", "Index")
 </div>
 
 @section Scripts {

@@ -1,13 +1,12 @@
 ﻿@model BeFit.Models.MealIngridient
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły składnika";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły składnika</h2>
 
 <div>
-    <h4>MealIngridient</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,13 +26,13 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ingridient)
+            Produkt
         </dt>
 
         <dd>
             <table class="table">
                 <tr>
-                    <th>Nazwa składnika</th>
+                    <th>Nazwa produktu</th>
                     <th>Jednostka miary</th>
                     <th>Tłuszcz</th>
                     <th>Białko</th>
@@ -70,6 +69,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Powrót do listy składników", "Index")
 </p>

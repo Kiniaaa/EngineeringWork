@@ -1,14 +1,14 @@
 ﻿@model BeFit.ViewModel.MealViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Dodaj posiłek";
 }
 @section scripts{
 
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<h2>Create</h2>
+<h2>Dodaj posiłek</h2>
 
 
 @using (Html.BeginForm())
@@ -17,11 +17,10 @@
 
 
 <div class="form-horizontal">
-    <h4>Meal</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Nazwa posiłku", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -29,7 +28,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Opis posiłku", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -37,7 +36,7 @@
     </div>
     <!-- MealIngridients-->
         <div class="form-group">
-            @Html.Label("Ingidients", new { @class = "col-md-2 control-label" })
+            @Html.Label("Składniki", new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.ListBoxFor(m => m.MealsIngridientsId, (MultiSelectList)ViewBag.MealIngridients)
             </div>
@@ -47,13 +46,13 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Dodaj" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do listy posiłków", "Index")
 </div>
 

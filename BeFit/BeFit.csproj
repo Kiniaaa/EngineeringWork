@@ -310,7 +310,6 @@
     <Content Include="Views\MealOpinions\Create.cshtml" />
     <Content Include="Views\MealOpinions\Delete.cshtml" />
     <Content Include="Views\MealOpinions\Details.cshtml" />
-    <Content Include="Views\MealOpinions\Edit.cshtml" />
     <Content Include="Views\MealOpinions\Index.cshtml" />
     <Content Include="Views\PhysicalActivities\Create.cshtml" />
     <Content Include="Views\PhysicalActivities\Delete.cshtml" />
@@ -319,8 +318,6 @@
     <Content Include="Views\PhysicalActivities\Index.cshtml" />
     <Content Include="Views\TypeOfDiets\Create.cshtml" />
     <Content Include="Views\TypeOfDiets\Delete.cshtml" />
-    <Content Include="Views\TypeOfDiets\Details.cshtml" />
-    <Content Include="Views\TypeOfDiets\Edit.cshtml" />
     <Content Include="Views\TypeOfDiets\Index.cshtml" />
     <Content Include="Views\TypeOfMeals\Create.cshtml" />
     <Content Include="Views\TypeOfMeals\Delete.cshtml" />

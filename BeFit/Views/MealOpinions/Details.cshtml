@@ -1,21 +1,24 @@
 ﻿@model BeFit.Models.MealOpinion
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły opinii</h2>
 
 <div>
-    <h4>MealOpinion</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Customer.UserName)
+            Klient
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Customer.UserName)
+            @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.Surname)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Email)
         </dd>
 
         <dt>
@@ -23,7 +26,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Meal.Name)
+            @Html.ActionLink(Model.Meal.Name.ToString(), "Details", "Meals", new { id = Model.Meal.Id }, string.Empty)
         </dd>
 
         <dt>
@@ -53,6 +56,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do listy opinii", "Index")
 </p>
