@@ -1,15 +1,32 @@
 ﻿@model BeFit.Models.Message
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Sczegóły wiadomości";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły wiadomości</h2>
 
 <div>
-    <h4>Message</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sender.Email)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Sender.FirstName)
+            @Html.DisplayFor(model => model.Sender.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Content)
         </dt>
@@ -18,9 +35,15 @@
             @Html.DisplayFor(model => model.Content)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Powrót do listy wiadomości", "Index")
 </p>

@@ -159,8 +159,8 @@ namespace BeFit.DAL
 
             var message = new List<Message>
             {
-                new Message { Sender = user[3], Receiver = user[1], Content = "Proszę jeść więcej warzyw" },
-                new Message { Sender = user[3], Receiver = user[2], Content = "Proszę zwiększyć ilość mięsa" }
+                new Message { Sender = user[3], Receiver = user[1], Subject = "Dieta wiosenna", Content = "Proszę jeść więcej warzyw", Date = DateTime.Now },
+                new Message { Sender = user[3], Receiver = user[2], Subject = "Zalecenia", Content = "Proszę zwiększyć ilość mięsa", Date = DateTime.Now }
             };
             message.ForEach(ms => context.Messages.Add(ms));
             context.SaveChanges();

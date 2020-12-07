@@ -21,7 +21,12 @@ namespace BeFit.Controllers
         // GET: Messages
         public ActionResult Index()
         {
-            return View(db.Messages.ToList());
+            var userId = User.Identity.GetUserId();
+            var context = new IdentityDbContext();
+            var userEmail = context.Users.Find(userId).UserName;
+            var user = db.Users.FirstOrDefault(u => u.Email == userEmail);
+
+            return View(db.Messages.Where(u => u.Receiver.Id == user.Id).ToList());
         }
 
         // GET: Messages/Details/5
@@ -67,6 +72,8 @@ namespace BeFit.Controllers
                 var userEmail = context.Users.Find(userId).UserName;
                 var sender = db.Users.FirstOrDefault(u => u.Email == userEmail);
                 message.Sender = sender;
+
+                message.Date = DateTime.Now;
 
                 db.Messages.Add(message);
                 db.SaveChanges();

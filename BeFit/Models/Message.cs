@@ -23,8 +23,19 @@ namespace BeFit.Models
         [Required]
         [MinLength(2)]
         [JsonIgnore]
+        [Display(Name = "Temat wiadomości")]
+        public String Subject { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        [JsonIgnore]
         [Display(Name = "Treść wiadomości")]
         public String Content { get; set; }
+
+        [Display(Name = "Data wysłania wiadomości")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm}", ApplyFormatInEditMode = true)]
+        public DateTime Date { get; set; }
 
 
     }
