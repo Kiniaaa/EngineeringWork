@@ -51,7 +51,6 @@
     <div class="form-group">
         @Html.Label( "Rola", new {@class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.DropDownList("Name")*@
             @Html.DropDownList("UserRoles", (SelectList)ViewBag.Role)
         </div>
     </div>

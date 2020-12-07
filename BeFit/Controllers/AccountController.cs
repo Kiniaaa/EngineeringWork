@@ -90,7 +90,7 @@ namespace BeFit.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Nieprawidłowe dane logowania.");
                     return View(model);
             }
         }
@@ -141,6 +141,7 @@ namespace BeFit.Controllers
         //
         // GET: /Account/Register
         [Authorize(Roles = "Administrator")]
+        //[AllowAnonymous]
         public ActionResult Register()
         {
             ViewBag.Role = new SelectList(context.Roles.Where(u => !u.Name.Contains("Klient")).ToList(), "Name", "Name");
@@ -151,6 +152,7 @@ namespace BeFit.Controllers
         // POST: /Account/Register
         [HttpPost]
         [Authorize(Roles = "Administrator")]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -176,7 +178,7 @@ namespace BeFit.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                //ViewBag.Role = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrator")).ToList(), "Name", "Name");
+                ViewBag.Role = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrator")).ToList(), "Name", "Name");
                 AddErrors(result);
             }
 

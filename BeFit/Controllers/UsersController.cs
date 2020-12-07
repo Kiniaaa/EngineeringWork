@@ -18,17 +18,10 @@ namespace BeFit.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            /*List<User> users;
-            if(User.IsInRole("Administartor"))
-            {
-                users = db.Users.Where(u => u.roleName.Contains("Klient")).ToList();
-            }
-            else 
-            {
-                users = db.Users.ToList();
-            }
-            return View(users);*/
-            return View(db.Users.Where(u => !u.roleName.Contains("Administrator")).ToList());
+            if (User.IsInRole("Administrator"))
+                return View(db.Users.ToList());
+            else
+                return View(db.Users.Where(u => u.roleName.Contains("Klient")).ToList());
         }
 
         // GET: Users/Details/5
