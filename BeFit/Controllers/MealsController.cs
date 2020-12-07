@@ -12,7 +12,6 @@ using BeFit.ViewModel;
 
 namespace BeFit.Controllers
 {
-    [Authorize]
     public class MealsController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
@@ -38,6 +37,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Meals/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.MealIngridients = new MultiSelectList(db.MealIngridients.Distinct().ToList(), "Id", "Name");
@@ -48,6 +48,7 @@ namespace BeFit.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MealViewModel mealView)
         {
@@ -66,6 +67,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Meals/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -92,6 +94,7 @@ namespace BeFit.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(MealViewModel mealView)
         {
@@ -115,6 +118,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Meals/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -131,6 +135,7 @@ namespace BeFit.Controllers
 
         // POST: Meals/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

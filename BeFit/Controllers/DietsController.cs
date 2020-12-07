@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BeFit.Controllers
 {
-    //[Authorize(Roles = "Administrator, Dietetyk")]
+    [Authorize]
     public class DietsController : Controller
     {
         private DietCenterContext db = new DietCenterContext();

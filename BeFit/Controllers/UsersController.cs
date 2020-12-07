@@ -11,7 +11,7 @@ using BeFit.Models;
 
 namespace BeFit.Controllers
 {
-    //[Authorize(Roles = "Administrator, Dietetyk")]
+    [Authorize]
     public class UsersController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
@@ -28,7 +28,7 @@ namespace BeFit.Controllers
                 users = db.Users.ToList();
             }
             return View(users);*/
-            return View(db.Users.ToList());
+            return View(db.Users.Where(u => !u.roleName.Contains("Administrator")).ToList());
         }
 
         // GET: Users/Details/5

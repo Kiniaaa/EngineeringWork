@@ -140,7 +140,7 @@ namespace BeFit.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Register()
         {
             ViewBag.Role = new SelectList(context.Roles.Where(u => !u.Name.Contains("Klient")).ToList(), "Name", "Name");
@@ -150,7 +150,7 @@ namespace BeFit.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
