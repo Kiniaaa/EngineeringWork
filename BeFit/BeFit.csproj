@@ -190,6 +190,7 @@
     <Compile Include="Controllers\MealIngridientsController.cs" />
     <Compile Include="Controllers\MealOpinionsController.cs" />
     <Compile Include="Controllers\MealsController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\PhysicalActivitiesController.cs" />
     <Compile Include="Controllers\TypeOfDietsController.cs" />
     <Compile Include="Controllers\TypeOfMealsController.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Models\MealIngridient.cs" />
     <Compile Include="Models\MealIngridientMeal.cs" />
     <Compile Include="Models\MealOpinion.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\PhysicalActivity.cs" />
     <Compile Include="Models\TypeOfDiet.cs" />
     <Compile Include="Models\TypeOfMeal.cs" />
@@ -339,6 +341,11 @@
     <Content Include="Views\CustomersData\Details.cshtml" />
     <Content Include="Views\CustomersData\Edit.cshtml" />
     <Content Include="Views\CustomersData\Index.cshtml" />
+    <Content Include="Views\Messages\Create.cshtml" />
+    <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Edit.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

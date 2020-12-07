@@ -156,6 +156,15 @@ namespace BeFit.DAL
             };
             mealOpinion.ForEach(mo => context.MealOpinions.Add(mo));
             context.SaveChanges();
+
+            var message = new List<Message>
+            {
+                new Message { Sender = user[3], Receiver = user[1], Content = "Proszę jeść więcej warzyw" },
+                new Message { Sender = user[3], Receiver = user[2], Content = "Proszę zwiększyć ilość mięsa" }
+            };
+            message.ForEach(ms => context.Messages.Add(ms));
+            context.SaveChanges();
+
         }
     }
 }

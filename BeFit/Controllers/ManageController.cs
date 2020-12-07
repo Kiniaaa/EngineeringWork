@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BeFit.Models;
+using BeFit.DAL;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BeFit.Controllers
 {
@@ -133,6 +135,15 @@ namespace BeFit.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        public ActionResult Delete()
+        {
+            var userId = User.Identity.GetUserId();
+            var context = new IdentityDbContext();
+            var userEmail = context.Users.Find(userId).UserName;
+            var db = new DietCenterContext();
+            var user = db.Users.FirstOrDefault(u => u.Email == userEmail);
+            return RedirectToAction($"Delete/{user.Id}", "Users");
         }
 
         protected override void Dispose(bool disposing)

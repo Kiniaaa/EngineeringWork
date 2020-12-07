@@ -46,5 +46,7 @@ namespace BeFit.Models
         public virtual List<Diet> Diets { get; set; }
         [JsonIgnore]
         public virtual List<CustomerData> CustomerDatas { get; set; }
+        [JsonIgnore]
+        public virtual List<Message> Messages { get; set; }
     }
 }

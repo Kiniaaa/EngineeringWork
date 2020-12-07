@@ -31,5 +31,6 @@ namespace BeFit.DAL
             modelBuilder.Entity<MealOpinion>().HasRequired<DietMeal>(mp => mp.DietMeal).WithOptional(dm => dm.MealOpinion).WillCascadeOnDelete(false);
         }
 
+        public System.Data.Entity.DbSet<BeFit.Models.Message> Messages { get; set; }
     }
 }

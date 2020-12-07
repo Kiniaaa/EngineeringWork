@@ -11,115 +11,107 @@ using BeFit.Models;
 
 namespace BeFit.Controllers
 {
-    [Authorize]
-    public class UsersController : Controller
+    public class MessagesController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
-        // GET: Users
+
+        // GET: Messages
         public ActionResult Index()
         {
-            if (User.IsInRole("Administrator"))
-                return View(db.Users.ToList());
-            else
-                return View(db.Users.Where(u => u.roleName.Contains("Klient")).ToList());
+            return View(db.Messages.ToList());
         }
 
-        // GET: Users/Details/5
+        // GET: Messages/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Message message = db.Messages.Find(id);
+            if (message == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DietsCustomer = db.Diets.Where(d => d.Customer.Id == id).ToList();
-            ViewBag.DietsDietician = db.Diets.Where(d => d.Dietician.Id == id).ToList();
-            return View(user);
+            return View(message);
         }
 
-        // GET: Users/Create
+        // GET: Messages/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Messages/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,password_hash,FirstName,Surname,Deleted,roleName,DateOfBirth")] User user)
+        public ActionResult Create([Bind(Include = "Id,Content")] Message message)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            return View(message);
         }
 
-        // GET: Users/Edit/5
+        // GET: Messages/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Message message = db.Messages.Find(id);
+            if (message == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(message);
         }
 
-        // POST: Users/Edit/5
+        // POST: Messages/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,password_hash,FirstName,Surname,Deleted,roleName,DateOfBirth")] User user)
+        public ActionResult Edit([Bind(Include = "Id,Content")] Message message)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
+                db.Entry(message).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(user);
+            return View(message);
         }
 
-        // GET: Users/Delete/5
+        // GET: Messages/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Message message = db.Messages.Find(id);
+            if (message == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(message);
         }
 
-        // POST: Users/Delete/5
-        [Authorize]
+        // POST: Messages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
-            user.Deleted = true;
+            Message message = db.Messages.Find(id);
+            db.Messages.Remove(message);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
