@@ -8,9 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using BeFit.DAL;
 using BeFit.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BeFit.Controllers
 {
+    [Authorize]
     public class MessagesController : Controller
     {
         private DietCenterContext db = new DietCenterContext();
@@ -39,6 +42,7 @@ namespace BeFit.Controllers
         // GET: Messages/Create
         public ActionResult Create()
         {
+            ViewBag.Receiver = new SelectList(db.Users.Where(u => u.roleName.Contains("Klient")), "Id", "Email");
             return View();
         }
 
@@ -47,15 +51,28 @@ namespace BeFit.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Content")] Message message)
+        public ActionResult Create([Bind(Include = "Id,Content, Receiver")] Message message)
         {
+            ModelState["Receiver.Id"].Errors.Clear();
+            ModelState["Receiver.Email"].Errors.Clear();
+            ModelState["Receiver.FirstName"].Errors.Clear();
+            ModelState["Receiver.Surname"].Errors.Clear();
             if (ModelState.IsValid)
             {
+                var receiver = db.Users.Find(message.Receiver.Id);
+                message.Receiver = receiver;
+
+                var userId = User.Identity.GetUserId();
+                var context = new IdentityDbContext();
+                var userEmail = context.Users.Find(userId).UserName;
+                var sender = db.Users.FirstOrDefault(u => u.Email == userEmail);
+                message.Sender = sender;
+
                 db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Receiver = new SelectList(db.Users.Where(u => u.roleName.Contains("Klient")), "Id", "Email", message.Receiver.Id);
             return View(message);
         }
 
