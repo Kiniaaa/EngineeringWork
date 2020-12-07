@@ -38,6 +38,7 @@ namespace BeFit.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.TypeOfMeal = db.TypeOfMeals.ToList();
             return View(diet);
         }
 

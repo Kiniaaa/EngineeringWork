@@ -143,7 +143,7 @@ namespace BeFit.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Role = new SelectList(context.Roles.Where(u => !u.Name.Contains("Administrator")).ToList(), "Name", "Name");
+            ViewBag.Role = new SelectList(context.Roles.Where(u => !u.Name.Contains("Klient")).ToList(), "Name", "Name");
             return View();
         }
 

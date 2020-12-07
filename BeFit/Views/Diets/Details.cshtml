@@ -112,32 +112,37 @@
             @Html.DisplayFor(model => model.AdditionalWarning)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DietMeals)
-        </dt>
-
-        <dd>
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Nazwa</th>
-                    <th>Opis</th>
-                </tr>
-                @foreach (var item in Model.DietMeals)
-                {
+        @foreach (var i in (List<BeFit.Models.TypeOfMeal>)ViewBag.TypeOfMeal)
+        {
+            <dt>
+                @Html.DisplayFor(model => i.Name)
+            </dt>
+            <dd>
+                <table class="table">
                     <tr>
-                        <td>
-                            @Html.ActionLink(item.Meal.Name.ToString(), "Details", "Meals", new { id = item.Meal.Id }, string.Empty)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Meal.Description)
-                        </td>
+                        <th>Nazwa posiłku</th>
+                        <th>Opis</th>
                     </tr>
-                }
-            </table>
-        </dd>
+                    @foreach (var item in Model.DietMeals)
+                    {
+                        if (item.TypeOfMeal == i)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.Meal.Name.ToString(), "Details", "Meals", new { id = item.Meal.Id }, string.Empty)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Meal.Description)
+                                </td>
+                            </tr>
 
-        @Html.ActionLink("Dodaj posiłek", "Create", "DietMeals", new { id = Model.Id }, string.Empty)
+                        }
+                    }
+                </table>
+            </dd>
+        }
+
+            @Html.ActionLink("Dodaj posiłek", "Create", "DietMeals", new { id = Model.Id }, string.Empty)
 
 
     </dl>
