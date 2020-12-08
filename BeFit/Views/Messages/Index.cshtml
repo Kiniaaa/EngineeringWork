@@ -4,10 +4,11 @@
     ViewBag.Title = "Wiadomości";
 }
 
-<h2>Wiadomości</h2>
+<h2>Otrzymane wiadomości</h2>
 
 <p>
-    @Html.ActionLink("Dodaj nową wiadomość", "Create")
+    @Html.ActionLink("Dodaj nową wiadomość", "Create") | 
+    @Html.ActionLink("Wysłane wiadomości", "Sent")
 </p>
 <table class="table">
     <tr>

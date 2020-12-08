@@ -343,7 +343,7 @@
     <Content Include="Views\CustomersData\Edit.cshtml" />
     <Content Include="Views\CustomersData\Index.cshtml" />
     <Content Include="Views\Messages\Create.cshtml" />
-    <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Messages\Sent.cshtml" />
     <Content Include="Views\Messages\Details.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
   </ItemGroup>

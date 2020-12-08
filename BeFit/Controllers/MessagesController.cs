@@ -29,6 +29,16 @@ namespace BeFit.Controllers
             return View(db.Messages.Where(u => u.Receiver.Id == user.Id).ToList());
         }
 
+        public ActionResult Sent()
+        {
+            var userId = User.Identity.GetUserId();
+            var context = new IdentityDbContext();
+            var userEmail = context.Users.Find(userId).UserName;
+            var user = db.Users.FirstOrDefault(u => u.Email == userEmail);
+
+            return View(db.Messages.Where(u => u.Sender.Id == user.Id).ToList());
+        }
+
         // GET: Messages/Details/5
         public ActionResult Details(int? id)
         {

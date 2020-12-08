@@ -21,6 +21,17 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Receiver)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Receiver.Email)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Receiver.FirstName)
+            @Html.DisplayFor(model => model.Receiver.Surname)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Subject)
         </dt>
         <dd>

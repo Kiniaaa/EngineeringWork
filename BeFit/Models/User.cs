@@ -17,6 +17,7 @@ namespace BeFit.Models
         public string Email { get; set; }
 
         public string password_hash { get; set; }
+        public string salt { get; set; }
 
         [Required]
         [Display(Name = "Imię")]
