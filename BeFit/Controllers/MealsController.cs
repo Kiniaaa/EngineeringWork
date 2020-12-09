@@ -22,6 +22,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Meals/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)

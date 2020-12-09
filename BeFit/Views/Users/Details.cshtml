@@ -227,6 +227,11 @@
 
     @if (Model.roleName == "Dietetyk")
     {
+        if (Request.IsAuthenticated)
+        {
+            @Html.ActionLink("Usuń", "Delete", new { id = Model.Id })
+        }
+
         <h3>Diety</h3>
         <table class="table">
             <thead>

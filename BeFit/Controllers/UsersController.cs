@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using BeFit.DAL;
 using BeFit.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BeFit.Controllers
 {
@@ -19,9 +21,9 @@ namespace BeFit.Controllers
         public ActionResult Index()
         {
             if (User.IsInRole("Administrator"))
-                return View(db.Users.ToList());
+                return View(db.Users.Where(u => u.Deleted == false && !u.roleName.Contains("Klient")).ToList());
             else
-                return View(db.Users.Where(u => u.roleName.Contains("Klient")).ToList());
+                return View(db.Users.Where(u => u.roleName.Contains("Klient") && u.Deleted == false).ToList());
         }
 
         // GET: Users/Details/5
@@ -42,6 +44,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Users/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -66,6 +69,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Users/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -121,7 +125,14 @@ namespace BeFit.Controllers
             User user = db.Users.Find(id);
             user.Deleted = true;
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            var userId = User.Identity.GetUserId();
+            var context = new IdentityDbContext();
+            var userEmail = context.Users.Find(userId).UserName;
+            var loggedUser = db.Users.FirstOrDefault(u => u.Email == userEmail);
+            if(loggedUser.Id == id)
+                HttpContext.GetOwinContext().Authentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

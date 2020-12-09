@@ -21,14 +21,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("BeFit", "Index", "Home")</li>
                     <li>@Html.ActionLink("Posiłki", "Index", "Meals")</li>
-                    <li>@Html.ActionLink("Opinie o posiłkach", "Index", "MealOpinions")</li>
-                    <li>@Html.ActionLink("Składniki posiłków", "Index", "MealIngridients")</li>
-                    <li>@Html.ActionLink("Produkty", "Index", "Ingridients")</li>
-                    <li>@Html.ActionLink("Typy diet", "Index", "TypeOfDiets")</li>
-                    <li>@Html.ActionLink("Diety", "Index", "Diets")</li>
-                    <li>@Html.ActionLink("Użytkownicy", "Index", "Users")</li>
-                    <li>@Html.ActionLink("Wiadomości", "Index", "Messages")</li>
+                    @if (Context.User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Użytkownicy", "Index", "Users")</li>
+                    }
+                    @if (Context.User.IsInRole("Dietetyk"))
+                    {
+                        <li>@Html.ActionLink("Opinie o posiłkach", "Index", "MealOpinions")</li>
+                        <li>@Html.ActionLink("Składniki posiłków", "Index", "MealIngridients")</li>
+                        <li>@Html.ActionLink("Produkty", "Index", "Ingridients")</li>
+                        <li>@Html.ActionLink("Typy diet", "Index", "TypeOfDiets")</li>
+                        <li>@Html.ActionLink("Diety", "Index", "Diets")</li>
+                        <li>@Html.ActionLink("Użytkownicy", "Index", "Users")</li>
+                        <li>@Html.ActionLink("Wiadomości", "Index", "Messages")</li>
+                    }
 
                     @*<li>@Html.ActionLink("Customer Data", "Index", "CustomerDatas")</li>
         <li>@Html.ActionLink("Diet Meals", "Index", "DietMeals")</li>
