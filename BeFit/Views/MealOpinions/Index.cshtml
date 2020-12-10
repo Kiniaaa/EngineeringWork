@@ -29,8 +29,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Customer.FirstName)
-            @Html.DisplayFor(modelItem => item.Customer.Surname)
+            @Html.ActionLink(item.Customer.FirstName + " " + item.Customer.Surname, "Details", "Users", new { id = item.Customer.Id }, string.Empty)
         </td>
         <td>
             @Html.ActionLink(item.Meal.Name.ToString(), "Details", "Meals", new { id = item.Meal.Id }, string.Empty)
@@ -44,10 +43,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
-        </td>
+        @if (Request.IsAuthenticated)
+        {
+            <td>
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            </td>
+        }
+
     </tr>
 }
 

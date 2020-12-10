@@ -1,13 +1,12 @@
 ﻿@model BeFit.Models.Diet
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły diety";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły diety</h2>
 
 <div>
-    <h4>Diet</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -134,6 +133,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Meal.Description)
                                 </td>
+                                <td>
+                                    @Html.ActionLink("Usuń posiłek z diety", "Delete", "DietMeals", new { id = item.Id }, string.Empty)
+                                </td>
                             </tr>
 
                         }
@@ -148,6 +150,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Powrót do listy diet", "Index")
 </p>

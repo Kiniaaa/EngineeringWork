@@ -312,7 +312,6 @@
     <Content Include="Views\MealIngridients\Index.cshtml" />
     <Content Include="Views\MealOpinions\Create.cshtml" />
     <Content Include="Views\MealOpinions\Delete.cshtml" />
-    <Content Include="Views\MealOpinions\Details.cshtml" />
     <Content Include="Views\MealOpinions\Index.cshtml" />
     <Content Include="Views\PhysicalActivities\Create.cshtml" />
     <Content Include="Views\PhysicalActivities\Delete.cshtml" />

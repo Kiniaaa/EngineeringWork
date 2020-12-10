@@ -22,7 +22,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Meals/Details/5
-        [Authorize]
+        [Authorize(Roles = "Dietetyk")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,7 +38,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Meals/Create
-        [Authorize]
+        [Authorize(Roles = "Dietetyk")]
         public ActionResult Create()
         {
             ViewBag.MealIngridients = new MultiSelectList(db.MealIngridients.Distinct().ToList(), "Id", "Name");
@@ -49,7 +49,7 @@ namespace BeFit.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Dietetyk")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MealViewModel mealView)
         {
@@ -68,7 +68,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Meals/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Dietetyk")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,7 +95,7 @@ namespace BeFit.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Dietetyk")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(MealViewModel mealView)
         {
@@ -119,7 +119,7 @@ namespace BeFit.Controllers
         }
 
         // GET: Meals/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Dietetyk")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,7 +136,7 @@ namespace BeFit.Controllers
 
         // POST: Meals/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize]
+        [Authorize(Roles = "Dietetyk")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
