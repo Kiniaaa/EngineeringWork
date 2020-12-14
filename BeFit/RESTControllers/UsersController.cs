@@ -25,9 +25,9 @@ namespace BeFit.RESTControllers
 
         // GET: api/Users/5
         [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        public IHttpActionResult GetUser(string email)
         {
-            User user = db.Users.Find(id);
+            User user = db.Users.FirstOrDefault(u => u.Email == email);
             if (user == null)
             {
                 return NotFound();
@@ -75,11 +75,12 @@ namespace BeFit.RESTControllers
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)
         {
-            if (!ModelState.IsValid)
+            bool condition = db.Users.Any(u => u.Email == user.Email);
+            if (!ModelState.IsValid && condition)
             {
                 return BadRequest(ModelState);
             }
-
+            
             db.Users.Add(user);
             db.SaveChanges();
 

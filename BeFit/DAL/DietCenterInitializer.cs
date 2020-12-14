@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace BeFit.DAL
 {
-    public class DietCenterInitializer : DropCreateDatabaseAlways<DietCenterContext>
+    public class DietCenterInitializer : DropCreateDatabaseIfModelChanges<DietCenterContext>
     {
         protected override void Seed(DietCenterContext context)
         {
