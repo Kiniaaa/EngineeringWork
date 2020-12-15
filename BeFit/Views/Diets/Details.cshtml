@@ -144,12 +144,12 @@
             </dd>
         }
 
-            @Html.ActionLink("Dodaj posiłek", "Create", "DietMeals", new { id = Model.Id }, string.Empty)
+            @Html.ActionLink("Dodaj posiłek", "Create", "DietMeals", new { id = Model.Id }, new { @class = "btn btn-default" })
 
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Powrót do listy diet", "Index")
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-default"}) 
+    @Html.ActionLink("Powrót do listy diet", "Index", new object { }, new { @class = "btn btn-default" })
 </p>

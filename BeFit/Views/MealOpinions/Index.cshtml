@@ -45,9 +45,9 @@
         </td>
         @if (Request.IsAuthenticated)
         {
-            <td>
-                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
-            </td>
+    <td>
+        @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-default" })
+    </td>
         }
 
     </tr>

@@ -7,8 +7,9 @@
 <h2>Posiłki</h2>
 
 <p>
-    @if(Request.IsAuthenticated){
-        @Html.ActionLink("Dodaj posiłek", "Create")
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Dodaj posiłek", "Create", new object { }, new { @class = "btn btn-default" })
     }
 </p>
 <table class="table">
@@ -33,9 +34,9 @@
         <td>
             @if (Request.IsAuthenticated)
             {
-                @Html.ActionLink(" Edytuj ", "Edit", new { id = item.Id })
-                @Html.ActionLink(" Szczegóły ", "Details", new { id = item.Id })
-                @Html.ActionLink(" Usuń ", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-default" }) 
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }, new { @class = "btn btn-default" }) 
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-default" }) 
             }
         </td>
     </tr>

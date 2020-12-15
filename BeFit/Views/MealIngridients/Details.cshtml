@@ -69,6 +69,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Powrót do listy składników", "Index")
+        @Html.ActionLink("Edycja", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Powrót do listy składników", "Index", new object { }, new { @class = "btn btn-default" })
 </p>

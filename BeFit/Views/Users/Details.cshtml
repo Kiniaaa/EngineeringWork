@@ -229,7 +229,7 @@
     {
         if (Request.IsAuthenticated)
         {
-            @Html.ActionLink("Usuń", "Delete", new { id = Model.Id })
+            @Html.ActionLink("Usuń", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
         }
 
         <h3>Diety</h3>
@@ -286,7 +286,7 @@
 <p>
     @if (Request.IsAuthenticated)
     {
-        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
     }
-    @Html.ActionLink("Powrót do listy użytkowników", "Index")
+    @Html.ActionLink("Powrót do listy użytkowników", "Index", new object { }, new { @class = "btn btn-default" })
 </p>

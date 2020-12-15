@@ -7,7 +7,7 @@
 <h2>Typy diet</h2>
 
 <p>
-    @Html.ActionLink("Dodaj nowy typ diety", "Create")
+    @Html.ActionLink("Dodaj nowy typ diety", "Create", new object { }, new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
@@ -29,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+            @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-default" })
         </td>
     </tr>
 }
